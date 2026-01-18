@@ -57,3 +57,19 @@ export function getCaseStudyBySlug(slug: string): CaseStudyData | undefined {
 export function getAllCaseStudies(): CaseStudyData[] {
   return loadCaseStudiesFromJson();
 }
+
+/**
+ * Get the next case study after the current one
+ * Industry standard: Navigation helper for sequential case studies
+ * Returns undefined if there's no next case study (current is last)
+ */
+export function getNextCaseStudy(currentSlug: string): CaseStudyData | undefined {
+  const caseStudies = loadCaseStudiesFromJson();
+  const currentIndex = caseStudies.findIndex((study) => study.slug === currentSlug);
+  
+  if (currentIndex === -1 || currentIndex === caseStudies.length - 1) {
+    return undefined;
+  }
+  
+  return caseStudies[currentIndex + 1];
+}

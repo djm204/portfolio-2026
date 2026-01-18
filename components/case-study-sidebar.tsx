@@ -1,7 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import type { CaseStudyFrontmatter } from '@/lib/types';
+import type { CaseStudyFrontmatter, CaseStudyData } from '@/lib/types';
 
 interface CaseStudySidebarProps {
   sections: {
@@ -10,6 +11,7 @@ interface CaseStudySidebarProps {
     outcome: string;
   };
   frontmatter: CaseStudyFrontmatter;
+  nextCaseStudy?: CaseStudyData;
 }
 
 /**
@@ -22,6 +24,7 @@ interface CaseStudySidebarProps {
 export function CaseStudySidebar({
   sections,
   frontmatter,
+  nextCaseStudy,
 }: CaseStudySidebarProps): JSX.Element {
   /**
    * Extract key statistics from outcome text
@@ -164,36 +167,51 @@ export function CaseStudySidebar({
           </div>
         )}
 
-        {/* Scroll to Section Links */}
-        <div>
-          <h4 className="text-xs font-semibold text-text-muted mb-3 uppercase tracking-wide">
-            Jump to Section
-          </h4>
-          <div className="space-y-1.5">
-            {[
-              { id: 'problem', title: 'Problem', icon: '⚠️' },
-              { id: 'solution', title: 'Solution', icon: '🔧' },
-              { id: 'outcome', title: 'Outcome', icon: '✅' },
-            ].map((section) => (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                className="block text-xs text-accent hover:text-accent-hover transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const element = document.querySelector(
-                    `[data-section="${section.id}"]`,
-                  );
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }}
-              >
-                {section.icon} {section.title}
-              </a>
-            ))}
+        {/* Next Case Study Preview */}
+        {nextCaseStudy ? (
+          <div>
+            <h4 className="text-xs font-semibold text-text-muted mb-3 uppercase tracking-wide">
+              Next Case Study
+            </h4>
+            <Link
+              href={`/case-studies/${nextCaseStudy.slug}`}
+              className="block p-4 bg-subtle-bg border border-border rounded-md hover:border-accent transition-all duration-200 group"
+            >
+              <div className="flex items-start gap-3">
+                <div className="flex-1 min-w-0">
+                  <h5 className="text-sm font-semibold text-foreground mb-1 group-hover:text-accent transition-colors line-clamp-2">
+                    {nextCaseStudy.frontmatter.title}
+                  </h5>
+                  {nextCaseStudy.frontmatter.subtitle && (
+                    <p className="text-xs text-text-muted mb-2 line-clamp-1">
+                      {nextCaseStudy.frontmatter.subtitle}
+                    </p>
+                  )}
+                  <p className="text-xs text-text-secondary leading-relaxed line-clamp-2 mb-3">
+                    {nextCaseStudy.sidebar.problem.substring(0, 120)}...
+                  </p>
+                  <div className="flex items-center gap-2 text-xs font-medium text-accent group-hover:text-accent-hover">
+                    Read Next →
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
-        </div>
+        ) : (
+          <div>
+            <h4 className="text-xs font-semibold text-text-muted mb-3 uppercase tracking-wide">
+              More Case Studies
+            </h4>
+            <Link
+              href="/case-studies"
+              className="block p-4 bg-subtle-bg border border-border rounded-md hover:border-accent transition-all duration-200 group text-center"
+            >
+              <div className="text-sm font-medium text-accent group-hover:text-accent-hover">
+                View All Case Studies →
+              </div>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

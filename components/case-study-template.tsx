@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { CaseStudySidebar } from '@/components/case-study-sidebar';
 import { EditableContent } from '@/components/editable-content';
+import { getNextCaseStudy } from '@/lib/case-studies';
 import type { CaseStudyData } from '@/lib/types';
 
 interface CaseStudyTemplateProps {
@@ -18,6 +19,7 @@ export function CaseStudyTemplate({
   caseStudy,
 }: CaseStudyTemplateProps): JSX.Element {
   const { frontmatter, sidebar } = caseStudy;
+  const nextCaseStudy = getNextCaseStudy(caseStudy.slug);
 
   return (
     <ErrorBoundary>
@@ -91,7 +93,11 @@ export function CaseStudyTemplate({
 
             {/* Sidebar */}
             <aside className="lg:col-span-4">
-              <CaseStudySidebar sections={sidebar} frontmatter={frontmatter} />
+              <CaseStudySidebar 
+                sections={sidebar} 
+                frontmatter={frontmatter}
+                nextCaseStudy={nextCaseStudy}
+              />
             </aside>
           </div>
         </div>
