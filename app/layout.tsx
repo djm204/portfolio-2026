@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { Navigation } from '@/components/navigation';
-import { Footer } from '@/components/footer';
+import { LayoutWrapper } from '@/components/layout-wrapper';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -32,9 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <Navigation />
-        {children}
-        <Footer />
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );
