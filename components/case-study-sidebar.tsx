@@ -25,7 +25,7 @@ export function CaseStudySidebar({
   sections,
   frontmatter,
   nextCaseStudy,
-}: CaseStudySidebarProps): JSX.Element {
+}: CaseStudySidebarProps): React.JSX.Element {
   /**
    * Extract key statistics from outcome text
    * Industry standard: Pattern matching for metrics extraction

@@ -14,7 +14,7 @@ export function LayoutWrapper({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <ThemeProvider>
       <AuthProvider>

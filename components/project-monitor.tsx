@@ -9,7 +9,7 @@ import type { ProjectMetrics } from '@/lib/types';
  * Verification: Test loading states, metric calculations, responsive layout
  * Should display key SRE/engineering metrics that demonstrate value
  */
-export function ProjectMonitor(): JSX.Element {
+export function ProjectMonitor(): React.JSX.Element {
   const [projects, setProjects] = useState<ProjectMetrics[]>([]);
   const [loading, setLoading] = useState(true);
 

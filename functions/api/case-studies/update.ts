@@ -50,7 +50,7 @@ export async function onRequestPost(context: {
       });
     }
 
-    const userInfo = await userInfoResponse.json();
+    const userInfo = await userInfoResponse.json() as { email: string };
     const adminEmail = context.env.ADMIN_EMAIL || 'me@davidmendez.dev';
 
     if (userInfo.email !== adminEmail) {
@@ -64,7 +64,7 @@ export async function onRequestPost(context: {
     }
 
     // Parse request body
-    const body = await context.request.json();
+    const body = await context.request.json() as { slug: string; content: string };
     const { slug, content } = body;
 
     if (!slug || !content) {

@@ -7,7 +7,7 @@ import { getCaseStudyBySlug } from '@/lib/case-studies';
  * Industry standard: Static page generation with data lookup
  * Verification: Test 404 handling, data loading, template rendering
  */
-export default function CaseStudyPage(): JSX.Element {
+export default function CaseStudyPage(): React.JSX.Element {
   const caseStudy = getCaseStudyBySlug('globalvision-modernization');
 
   if (!caseStudy) {

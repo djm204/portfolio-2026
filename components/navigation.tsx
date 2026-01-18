@@ -11,7 +11,7 @@ import { useAuth } from './auth-provider';
  * Verification: Test active state highlighting, keyboard navigation, responsive menu
  * Should be fully accessible and indicate current page
  */
-export function Navigation(): JSX.Element {
+export function Navigation(): React.JSX.Element {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { user } = useAuth();

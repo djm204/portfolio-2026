@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
  * Verification: Test responsive layout, avatar display, stat calculations
  * Should look like a GitHub profile page header
  */
-export function GitHubHero(): JSX.Element {
+export function GitHubHero(): React.JSX.Element {
   const stats = [
     { label: 'Years Experience', value: '11+' },
     { label: 'Cost Reduction', value: '80%' },

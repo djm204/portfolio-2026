@@ -10,7 +10,7 @@ import { useTheme } from './theme-provider';
  * Verification: Test responsive layout, link accessibility
  * Should be minimal and accessible
  */
-export function Footer(): JSX.Element {
+export function Footer(): React.JSX.Element {
   const { theme } = useTheme();
 
   return (

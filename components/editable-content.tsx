@@ -21,7 +21,7 @@ interface EditableContentProps {
 export function EditableContent({
   content: staticContent,
   slug,
-}: EditableContentProps): JSX.Element {
+}: EditableContentProps): React.JSX.Element {
   const { isAdmin, user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(staticContent);
@@ -38,7 +38,7 @@ export function EditableContent({
       try {
         const response = await fetch(`/api/case-studies/read?slug=${encodeURIComponent(slug)}`);
         if (response.ok) {
-          const data = await response.json();
+          const data = await response.json() as { content: string | null };
           if (data.content) {
             // Use override content if available
             setContent(data.content);
@@ -46,7 +46,7 @@ export function EditableContent({
           }
         }
       } catch (error) {
-        console.error('Failed to fetch content override:', error);
+        console.error('Failed to fetch content override:', error as Error);
         // Fall back to static content
       } finally {
         setIsLoading(false);
@@ -85,7 +85,7 @@ export function EditableContent({
       });
 
       if (!response.ok) {
-        const error = await response.json().catch(() => ({}));
+        const error = await response.json().catch(() => ({})) as { error?: string };
         throw new Error(error.error || 'Failed to save content');
       }
 
@@ -95,9 +95,9 @@ export function EditableContent({
       
       // Optionally reload to fetch updated content from KV
       // window.location.reload();
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Failed to save content:', error);
-      alert(error instanceof Error ? error.message : 'Failed to save content. Please try again.');
+      alert((error instanceof Error ? error.message : 'Failed to save content. Please try again.'));
     } finally {
       setIsSaving(false);
     }

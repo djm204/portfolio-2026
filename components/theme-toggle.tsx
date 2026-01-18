@@ -7,7 +7,7 @@ import { useTheme } from './theme-provider';
  * Industry standard: Theme switcher button
  * Verification: Test theme switching, icon display, accessibility
  */
-export function ThemeToggle(): JSX.Element {
+export function ThemeToggle(): React.JSX.Element {
   const { theme, toggleTheme } = useTheme();
 
   return (

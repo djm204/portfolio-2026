@@ -17,7 +17,7 @@ interface CaseStudyTemplateProps {
  */
 export function CaseStudyTemplate({
   caseStudy,
-}: CaseStudyTemplateProps): JSX.Element {
+}: CaseStudyTemplateProps): React.JSX.Element {
   const { frontmatter, sidebar } = caseStudy;
   const nextCaseStudy = getNextCaseStudy(caseStudy.slug);
 

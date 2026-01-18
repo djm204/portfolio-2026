@@ -7,7 +7,7 @@ import { getAllCaseStudies } from '@/lib/case-studies';
  * Industry standard: Data-driven page generation
  * Verification: Test link navigation, responsive grid layout, accessibility
  */
-export default function CaseStudiesPage(): JSX.Element {
+export default function CaseStudiesPage(): React.JSX.Element {
   const caseStudies = getAllCaseStudies();
 
   return (

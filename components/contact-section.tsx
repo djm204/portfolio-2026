@@ -10,7 +10,7 @@ import { useTheme } from './theme-provider';
  * Industry standard: Contact information display with social links
  * Verification: Test link accessibility, responsive layout, hover effects
  */
-export function ContactSection(): JSX.Element {
+export function ContactSection(): React.JSX.Element {
   const { theme } = useTheme();
   
   const contactLinks = [

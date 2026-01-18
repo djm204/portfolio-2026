@@ -16,7 +16,7 @@ interface MDXContentProps {
   content: string;
 }
 
-export function MDXContent({ content }: MDXContentProps): JSX.Element {
+export function MDXContent({ content }: MDXContentProps): React.JSX.Element {
   if (!content) {
     return (
       <div className="text-text-secondary">

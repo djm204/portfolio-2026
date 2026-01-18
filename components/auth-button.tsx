@@ -8,7 +8,7 @@ import { useState } from 'react';
  * Industry standard: Authentication UI component
  * Verification: Test login/logout flows, error handling
  */
-export function AuthButton(): JSX.Element {
+export function AuthButton(): React.JSX.Element {
   const { user, isLoading, signIn, signOut } = useAuth();
   const [isSigningIn, setIsSigningIn] = useState(false);
 

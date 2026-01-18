@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
  * Verification: Test responsive layout, link accessibility, content readability
  * Should demonstrate the philosophy without being overly technical
  */
-export function AILeadership(): JSX.Element {
+export function AILeadership(): React.JSX.Element {
   return (
     <section
       className="py-12"

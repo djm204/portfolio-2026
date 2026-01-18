@@ -16,12 +16,10 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
  * Industry standard: Theme management with localStorage persistence
  * Verification: Test theme switching, persistence, system preference detection
  */
-export function ThemeProvider({ children }: { children: ReactNode }): JSX.Element {
+export function ThemeProvider({ children }: { children: ReactNode }): React.JSX.Element {
   const [theme, setTheme] = useState<Theme>('dark');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     // Check localStorage first, then system preference
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme) {

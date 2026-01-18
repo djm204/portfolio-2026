@@ -3,7 +3,7 @@
  * Verification: Test loading state display during navigation
  * Should provide clear feedback during page transitions
  */
-export default function Loading(): JSX.Element {
+export default function Loading(): React.JSX.Element {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
