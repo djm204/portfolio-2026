@@ -1,7 +1,8 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@layer utilities {
-  :root {
+:root {
     /* GitHub Light Mode Colors */
     --background: #ffffff;
     --foreground: #24292f;
@@ -267,12 +268,10 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
   }
-}
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Text balance utility */
+.text-balance {
+  text-wrap: balance;
 }
 
 /* Accessibility: Focus visible styles - GitHub blue */
