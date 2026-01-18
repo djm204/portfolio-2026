@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { AuthButton } from './auth-button';
+import { useAuth } from './auth-provider';
 
 /**
  * Navigation Component
@@ -12,9 +13,12 @@ import { AuthButton } from './auth-button';
 export function Navigation(): JSX.Element {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { user } = useAuth();
   
-  // Only show auth button when banana=true query parameter is present
-  const showAuth = searchParams.get('banana') === 'true';
+  // Show auth button if:
+  // 1. User is signed in (always show sign-out option), OR
+  // 2. banana=true query parameter is present (show sign-in button)
+  const showAuth = user !== null || searchParams.get('banana') === 'true';
 
   const navItems = [
     { href: '/', label: 'Home' },
