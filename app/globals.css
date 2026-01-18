@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* GitHub Light Mode Colors */
+  --background: #ffffff;
+  --foreground: #24292f;
+  --border: #d0d7de;
+  --border-muted: #d8dee4;
+  --subtle-bg: #f6f8fa;
+  --accent: #0969da;
+  --accent-hover: #0860ca;
+  --text-muted: #57606a;
+  --text-secondary: #656d76;
+  --success: #1a7f37;
+  --warning: #9a6700;
+  --danger: #cf222e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* GitHub Dark Mode Colors */
+    --background: #0d1117;
+    --foreground: #c9d1d9;
+    --border: #30363d;
+    --border-muted: #21262d;
+    --subtle-bg: #161b22;
+    --accent: #58a6ff;
+    --accent-hover: #79c0ff;
+    --text-muted: #8b949e;
+    --text-secondary: #b1bac4;
+    --success: #3fb950;
+    --warning: #d29922;
+    --danger: #f85149;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* GitHub-style borders and shadows */
+.gh-border {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.gh-box {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.gh-box-subtle {
+  background: var(--subtle-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+}
+
+/* Terminal/Unix color scheme for tags */
+.tag-terminal-green {
+  background-color: #1e4620;
+  color: #4ade80;
+  border: 1px solid #22c55e;
+  font-weight: 600;
+}
+
+.tag-terminal-yellow {
+  background-color: #422006;
+  color: #fbbf24;
+  border: 1px solid #f59e0b;
+  font-weight: 600;
+}
+
+.tag-terminal-blue {
+  background-color: #1e3a5f;
+  color: #60a5fa;
+  border: 1px solid #3b82f6;
+  font-weight: 600;
+}
+
+.tag-terminal-cyan {
+  background-color: #164e63;
+  color: #22d3ee;
+  border: 1px solid #06b6d4;
+  font-weight: 600;
+}
+
+.tag-terminal-magenta {
+  background-color: #4a1e3d;
+  color: #f472b6;
+  border: 1px solid #ec4899;
+  font-weight: 600;
+}
+
+.tag-terminal-orange {
+  background-color: #431407;
+  color: #fb923c;
+  border: 1px solid #f97316;
+  font-weight: 600;
+}
+
+.tag-terminal-purple {
+  background-color: #3b1e4a;
+  color: #a78bfa;
+  border: 1px solid #8b5cf6;
+  font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tag-terminal-green {
+    background-color: #0f2e15;
+    color: #4ade80;
+    border: 1px solid #22c55e;
+  }
+
+  .tag-terminal-yellow {
+    background-color: #2d1b06;
+    color: #fbbf24;
+    border: 1px solid #f59e0b;
+  }
+
+  .tag-terminal-blue {
+    background-color: #0f1f3f;
+    color: #60a5fa;
+    border: 1px solid #3b82f6;
+  }
+
+  .tag-terminal-cyan {
+    background-color: #0a2e3f;
+    color: #22d3ee;
+    border: 1px solid #06b6d4;
+  }
+
+  .tag-terminal-magenta {
+    background-color: #2d0f25;
+    color: #f472b6;
+    border: 1px solid #ec4899;
+  }
+
+  .tag-terminal-orange {
+    background-color: #2d0a07;
+    color: #fb923c;
+    border: 1px solid #f97316;
+  }
+
+  .tag-terminal-purple {
+    background-color: #25102d;
+    color: #a78bfa;
+    border: 1px solid #8b5cf6;
+  }
+}
+
+/* Monitoring Dashboard Enhancements */
+.monitoring-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.monitoring-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.monitoring-card:hover::before {
+  opacity: 1;
+}
+
+/* Progress bar animation */
+@keyframes progressFill {
+  from {
+    width: 0;
+  }
+}
+
+.progress-bar {
+  animation: progressFill 1s ease-out;
+}
+
+/* Metric card hover effect */
+.metric-card {
+  transition: all 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .metric-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Accessibility: Focus visible styles - GitHub blue */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
