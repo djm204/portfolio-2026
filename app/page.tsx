@@ -1,6 +1,7 @@
 import { GitHubHero } from '@/components/github-hero';
 import { ProjectMonitor } from '@/components/project-monitor';
 import { AILeadership } from '@/components/ai-leadership';
+import { ContactSection } from '@/components/contact-section';
 import { ErrorBoundary } from '@/components/error-boundary';
 import Link from 'next/link';
 
@@ -26,6 +27,9 @@ export default function Home() {
         </ErrorBoundary>
         <ErrorBoundary>
           <AILeadership />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <ContactSection />
         </ErrorBoundary>
       </div>
     </main>
