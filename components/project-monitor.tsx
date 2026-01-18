@@ -195,7 +195,7 @@ export function ProjectMonitor(): React.JSX.Element {
                   <h3 className="text-base font-bold text-foreground leading-tight">
                     {project.name}
                   </h3>
-                  <div className="flex items-center gap-1.5 flex-shrink-0 ml-2">
+                  <div className="flex items-center gap-1.5 shrink-0 ml-2">
                     <div
                       className={`w-2 h-2 rounded-full ${getStatusIndicator(project.status)} animate-pulse`}
                       aria-label={`Status: ${project.status}`}

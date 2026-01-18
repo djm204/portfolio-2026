@@ -20,13 +20,13 @@ export function GitHubHero(): React.JSX.Element {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Avatar Section */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-accent to-accent-hover border-4 border-background shadow-lg" />
+              <div className="w-32 h-32 rounded-full bg-linear-to-br from-accent to-accent-hover border-4 border-background shadow-lg" />
             </motion.div>
           </div>
 
