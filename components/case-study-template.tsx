@@ -86,36 +86,6 @@ export function CaseStudyTemplate({
               <EditableContent
                 content={caseStudy.mdxContent || ''}
                 slug={caseStudy.slug}
-                onSave={async (newContent) => {
-                  // Get session for auth token
-                  const { getSession } = await import('@/lib/auth-client');
-                  const session = getSession();
-                  
-                  if (!session) {
-                    throw new Error('Not authenticated');
-                  }
-
-                  // Save content via API
-                  const response = await fetch('/api/case-studies/update', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      Authorization: `Bearer ${session.token}`,
-                    },
-                    body: JSON.stringify({
-                      slug: caseStudy.slug,
-                      content: newContent,
-                    }),
-                  });
-
-                  if (!response.ok) {
-                    const error = await response.json().catch(() => ({}));
-                    throw new Error(error.error || 'Failed to save content');
-                  }
-
-                  // Reload page to show updated content
-                  window.location.reload();
-                }}
               />
             </article>
 

@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from './auth-provider';
 import { MDXContent } from './mdx-content';
+import { getSession } from '@/lib/auth-client';
 
 interface EditableContentProps {
   content: string;
   slug: string;
-  onSave?: (content: string) => Promise<void>;
 }
 
 /**
@@ -21,7 +21,6 @@ interface EditableContentProps {
 export function EditableContent({
   content: staticContent,
   slug,
-  onSave,
 }: EditableContentProps): JSX.Element {
   const { isAdmin, user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
@@ -63,17 +62,42 @@ export function EditableContent({
   }
 
   const handleSave = async (): Promise<void> => {
-    if (!onSave) return;
-
     setIsSaving(true);
     try {
-      await onSave(editedContent);
+      // Get session for auth token
+      const session = getSession();
+      
+      if (!session) {
+        throw new Error('Not authenticated');
+      }
+
+      // Save content via API
+      const response = await fetch('/api/case-studies/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.token}`,
+        },
+        body: JSON.stringify({
+          slug,
+          content: editedContent,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        throw new Error(error.error || 'Failed to save content');
+      }
+
       // Update displayed content after successful save
       setContent(editedContent);
       setIsEditing(false);
+      
+      // Optionally reload to fetch updated content from KV
+      // window.location.reload();
     } catch (error) {
       console.error('Failed to save content:', error);
-      alert('Failed to save content. Please try again.');
+      alert(error instanceof Error ? error.message : 'Failed to save content. Please try again.');
     } finally {
       setIsSaving(false);
     }
