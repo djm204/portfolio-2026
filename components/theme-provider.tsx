@@ -43,11 +43,8 @@ export function ThemeProvider({ children }: { children: ReactNode }): JSX.Elemen
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
+  // Always provide the context, even before mount
+  // This prevents the "must be used within ThemeProvider" error
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
