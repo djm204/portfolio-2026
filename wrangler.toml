@@ -1,0 +1,11 @@
+# Cloudflare Pages configuration
+# This file is used if you need to deploy with Wrangler CLI
+# For static exports, Cloudflare Pages will auto-detect Next.js
+
+name = "portfolio-2026"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "out"
+
+# If you need full-stack capabilities (SSR, API routes), uncomment below
+# and use @cloudflare/next-on-pages adapter instead of static export
+# compatibility_flags = ["nodejs_compat"]
