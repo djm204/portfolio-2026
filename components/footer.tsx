@@ -13,11 +13,11 @@ export function Footer(): JSX.Element {
       role="contentinfo"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
           {/* Contact Links */}
-          <div className="flex flex-wrap gap-4 items-center">
+          <div className="flex flex-wrap gap-6 items-center">
             <Link
-              href="https://www.linkedin.com/in/davidmendez"
+              href="https://www.linkedin.com/in/djm204"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-text-muted hover:text-accent transition-colors flex items-center gap-2"
@@ -37,8 +37,7 @@ export function Footer(): JSX.Element {
         
         <div className="text-center text-sm text-text-muted">
           <p>
-            Built with Next.js 15, Tailwind CSS, and Framer Motion. Deployed on
-            Cloudflare Pages.
+            Built with Next.js 15, React Server Components, and Tailwind CSS.
           </p>
           <p className="mt-2">
             © {new Date().getFullYear()} David Mendez. All rights reserved.
