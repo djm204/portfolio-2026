@@ -63,7 +63,7 @@ export function Footer(): React.JSX.Element {
         
         <div className="text-center text-sm text-text-muted">
           <p>
-            Built with Next.js 15, React Server Components, and Tailwind CSS.
+            Built with Next.js 16, React 19, Tailwind CSS 4, and TypeScript.
           </p>
           <p className="mt-2">
             © {new Date().getFullYear()} David Mendez. All rights reserved.
