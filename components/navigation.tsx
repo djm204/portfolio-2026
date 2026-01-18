@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { AuthButton } from './auth-button';
 
 /**
@@ -11,6 +11,10 @@ import { AuthButton } from './auth-button';
  */
 export function Navigation(): JSX.Element {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  
+  // Only show auth button when banana=true query parameter is present
+  const showAuth = searchParams.get('banana') === 'true';
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -52,7 +56,7 @@ export function Navigation(): JSX.Element {
                 );
               })}
             </ul>
-            <AuthButton />
+            {showAuth && <AuthButton />}
           </div>
         </div>
       </div>
