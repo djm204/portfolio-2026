@@ -12,6 +12,7 @@ export async function onRequestPost(context: {
   env: {
     ADMIN_EMAIL?: string;
     GOOGLE_CLIENT_ID?: string;
+    CONTENT_KV?: KVNamespace; // Cloudflare KV namespace for content overrides
   };
 }): Promise<Response> {
   try {
@@ -20,7 +21,10 @@ export async function onRequestPost(context: {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       });
     }
 
@@ -39,7 +43,10 @@ export async function onRequestPost(context: {
     if (!userInfoResponse.ok) {
       return new Response(JSON.stringify({ error: 'Invalid token' }), {
         status: 401,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       });
     }
 
@@ -49,7 +56,10 @@ export async function onRequestPost(context: {
     if (userInfo.email !== adminEmail) {
       return new Response(JSON.stringify({ error: 'Access denied' }), {
         status: 403,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       });
     }
 
@@ -62,20 +72,45 @@ export async function onRequestPost(context: {
         JSON.stringify({ error: 'Missing slug or content' }),
         {
           status: 400,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
         }
       );
     }
 
-    // TODO: Save content to database or file system
-    // For now, return success
-    // In production, you'd update the database or trigger a rebuild
+    // Save content to Cloudflare KV for runtime overrides
+    // Industry standard: Use KV for fast, edge-accessible content storage
+    const kv = context.env.CONTENT_KV;
+    
+    if (kv) {
+      const key = `case-study:${slug}`;
+      await kv.put(key, content, {
+        metadata: {
+          updatedAt: new Date().toISOString(),
+          updatedBy: userInfo.email,
+        },
+      });
+    } else {
+      // Fallback: Log warning if KV is not configured
+      console.warn('CONTENT_KV namespace not configured. Content update not persisted.');
+    }
 
     return new Response(
-      JSON.stringify({ success: true, message: 'Content updated' }),
+      JSON.stringify({ 
+        success: true, 
+        message: 'Content updated',
+        slug,
+      }),
       {
         status: 200,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
       }
     );
   } catch (error) {
@@ -84,7 +119,10 @@ export async function onRequestPost(context: {
       JSON.stringify({ error: 'Internal server error' }),
       {
         status: 500,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       }
     );
   }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from './auth-provider';
 import { MDXContent } from './mdx-content';
 
@@ -12,23 +12,54 @@ interface EditableContentProps {
 
 /**
  * Editable Content Component
- * Industry standard: Inline editing with authentication
- * Verification: Test edit mode, save functionality, authentication checks
+ * Industry standard: Inline editing with authentication and KV overrides
+ * Verification: Test edit mode, save functionality, authentication checks, KV content loading
  * 
  * Allows authenticated admin users to edit MDX content inline
+ * Fetches content overrides from Cloudflare KV if available
  */
 export function EditableContent({
-  content,
+  content: staticContent,
   slug,
   onSave,
 }: EditableContentProps): JSX.Element {
   const { isAdmin, user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
-  const [editedContent, setEditedContent] = useState(content);
+  const [content, setContent] = useState(staticContent);
+  const [editedContent, setEditedContent] = useState(staticContent);
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
+  // Fetch content override from KV on mount (for admins)
+  useEffect(() => {
+    if (!isAdmin || !user) return;
+
+    const fetchOverride = async (): Promise<void> => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`/api/case-studies/read?slug=${encodeURIComponent(slug)}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.content) {
+            // Use override content if available
+            setContent(data.content);
+            setEditedContent(data.content);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch content override:', error);
+        // Fall back to static content
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchOverride();
+  }, [isAdmin, user, slug]);
+
+  // For non-admins, always show static content
   if (!isAdmin || !user) {
-    return <MDXContent content={content} />;
+    return <MDXContent content={staticContent} />;
   }
 
   const handleSave = async (): Promise<void> => {
@@ -37,6 +68,8 @@ export function EditableContent({
     setIsSaving(true);
     try {
       await onSave(editedContent);
+      // Update displayed content after successful save
+      setContent(editedContent);
       setIsEditing(false);
     } catch (error) {
       console.error('Failed to save content:', error);
@@ -50,6 +83,20 @@ export function EditableContent({
     setEditedContent(content);
     setIsEditing(false);
   };
+
+  // Show loading state while fetching override
+  if (isLoading && isAdmin) {
+    return (
+      <div className="relative">
+        <div className="mb-4 flex items-center justify-between bg-accent/10 border border-accent rounded p-3">
+          <span className="text-sm text-foreground font-medium">
+            Loading content...
+          </span>
+        </div>
+        <MDXContent content={staticContent} />
+      </div>
+    );
+  }
 
   if (isEditing) {
     return (

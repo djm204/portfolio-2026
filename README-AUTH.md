@@ -39,17 +39,44 @@ Only the email address specified in `ADMIN_EMAIL` (default: `me@davidmendez.dev`
 - Edit case study content inline
 - Save changes to content
 
-### 4. Cloudflare Pages Functions
+### 4. Cloudflare KV Setup
 
-The API endpoint for saving content is deployed as a Cloudflare Pages Function at:
-- `/functions/api/case-studies/update.ts`
+Content overrides are stored in Cloudflare KV for fast, edge-accessible storage:
 
-This function:
-- Verifies the Google OAuth token
-- Checks that the user's email matches `ADMIN_EMAIL`
-- Updates the case study content (TODO: implement actual database/file update)
+1. **Create a KV Namespace:**
+   ```bash
+   wrangler kv:namespace create "CONTENT_KV"
+   ```
 
-### 5. Usage
+2. **Add to `wrangler.toml` (if using Wrangler):**
+   ```toml
+   [[kv_namespaces]]
+   binding = "CONTENT_KV"
+   id = "your-kv-namespace-id"
+   ```
+
+3. **In Cloudflare Dashboard:**
+   - Go to your Pages project
+   - Navigate to Settings → Functions
+   - Add KV namespace binding:
+     - Variable name: `CONTENT_KV`
+     - KV namespace: Select your namespace
+
+**Note:** If KV is not configured, the editing functionality will still work, but content updates won't persist. The system will gracefully fall back to static content.
+
+### 5. Cloudflare Pages Functions
+
+The API endpoints for content management are deployed as Cloudflare Pages Functions:
+- `/functions/api/case-studies/update.ts` - Saves content to KV
+- `/functions/api/case-studies/read.ts` - Reads content from KV
+
+These functions:
+- Verify the Google OAuth token
+- Check that the user's email matches `ADMIN_EMAIL`
+- Store/retrieve content overrides in Cloudflare KV
+- Fall back gracefully if KV is not configured
+
+### 6. Usage
 
 1. Click "Sign In with Google" in the navigation
 2. Authenticate with your Google account (must be `me@davidmendez.dev`)
@@ -66,10 +93,17 @@ This function:
 - OAuth tokens are validated on every API request
 - Content updates require valid authentication
 
+## How It Works
+
+1. **Static Content (Default):** Case studies are built from MDX files at build time
+2. **Content Overrides:** When you edit content, it's stored in Cloudflare KV
+3. **Content Resolution:** The site checks KV first, then falls back to static content
+4. **Persistence:** KV content persists across deployments until you update it
+
 ## Future Enhancements
 
-- Implement actual database/file system updates
-- Add content versioning/history
+- Add content versioning/history in KV metadata
 - Add draft/publish workflow
 - Support editing frontmatter
 - Add image upload capabilities
+- Sync KV overrides back to Git repository (optional)
