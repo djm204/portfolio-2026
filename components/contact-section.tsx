@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 /**
  * Contact Section Component
@@ -12,14 +13,14 @@ export function ContactSection(): JSX.Element {
   const contactLinks = [
     {
       label: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/davidmendez',
-      icon: '💼',
+      href: 'https://www.linkedin.com/in/djm204',
+      icon: 'image',
       description: 'Connect on LinkedIn',
     },
     {
       label: 'Email',
       href: 'mailto:me@davidmendez.dev',
-      icon: '✉️',
+      icon: 'svg',
       description: 'me@davidmendez.dev',
     },
   ];
@@ -58,7 +59,31 @@ export function ContactSection(): JSX.Element {
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className="group flex items-center gap-3 px-6 py-4 bg-subtle-bg border border-border rounded-lg hover:border-accent hover:bg-background transition-all duration-200 min-w-[200px]"
               >
-                <span className="text-2xl">{link.icon}</span>
+                {link.icon === 'image' ? (
+                  <Image
+                    src="/assets/linkedin-white.png"
+                    alt="LinkedIn"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 opacity-80 group-hover:opacity-100 transition-opacity"
+                    unoptimized
+                  />
+                ) : (
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-6 h-6 text-text-muted group-hover:text-accent transition-colors"
+                  >
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                )}
                 <div className="flex flex-col items-start">
                   <span className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors">
                     {link.label}
