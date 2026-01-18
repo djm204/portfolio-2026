@@ -1,0 +1,56 @@
+---
+title: "ADR-003: Standardizing Observability with Axiom and Sentry"
+subtitle: Centralized logging and error tracking for Edge-first architecture
+status: Completed
+timeline: 3 months
+impact: 90%+ MTTR reduction, proactive monitoring
+---
+
+## Problem
+
+Post-migration, the decentralized nature of Edge functions and AWS Lambdas made debugging difficult. We lacked a "single pane of glass" for logs and real-time error reporting, leading to increased Mean Time to Recovery (MTTR) during incidents.
+
+**Key Challenges**:
+
+- **Distributed Logs**: Logs scattered across Vercel Edge, AWS Lambda, and RDS
+- **No Centralized View**: Difficult to correlate errors across services
+- **Slow Debugging**: Manual log searching increased MTTR
+- **Reactive Monitoring**: Errors discovered by clients before engineering team
+- **Limited Context**: Missing stack traces and request context
+
+## Solution
+
+We standardized our observability stack on **Axiom** for log aggregation and **Sentry** for error tracking.
+
+### Axiom Selection Rationale
+
+- High-performance querying of structured logs
+- Cost-effective ingestion from Vercel and AWS
+- Real-time log streaming and analysis
+- Excellent integration with Edge functions
+
+### Sentry Selection Rationale
+
+- Deep integration with React/Next.js
+- Comprehensive stack traces for Edge-side failures
+- Real-time error alerts and notifications
+- Source map support for production debugging
+- Performance monitoring capabilities
+
+**Implementation**:
+
+- Centralized log aggregation from all services
+- Automated error tracking with context
+- Real-time alerting for critical errors
+- Dashboard setup for key metrics
+- Team training on observability tools
+
+## Outcome
+
+- **SRE Efficiency**: The "Verify" application team could identify and resolve production regressions in **minutes rather than hours**, dramatically reducing MTTR.
+
+- **Proactive Monitoring**: Established automated alerts that allowed the team to fix errors before they were reported by enterprise clients, improving customer satisfaction.
+
+- **Debugging Velocity**: Comprehensive stack traces and log correlation enabled rapid root cause analysis, reducing incident duration.
+
+- **Cost Optimization**: Axiom's efficient querying reduced log storage costs compared to traditional solutions while improving performance.

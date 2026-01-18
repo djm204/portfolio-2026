@@ -1,0 +1,40 @@
+---
+title: "ADR-001: Migration from Legacy Windows/C++ to Edge-First Vercel Architecture"
+subtitle: Legacy Windows/C++ to Edge-First Architecture Migration
+status: Completed
+timeline: 6 months
+impact: 80% cost reduction, instant deployments, improved reliability
+---
+
+## Problem
+
+The legacy infrastructure relied on a Windows/C++ stack that was becoming increasingly expensive to maintain, slow to scale, and difficult to deploy. Key challenges included:
+
+- **High Operational Costs**: Infrastructure overhead consuming 40% of engineering budget
+- **Manual Deployment Cycles**: Multi-hour deployment windows prone to human error
+- **Limited Scalability**: Windows Server instances difficult to scale horizontally
+- **Technical Debt**: Bloated systems requiring constant maintenance
+- **Deployment Risk**: Manual processes increased risk of production incidents
+
+## Solution
+
+We decided to migrate the frontend and middle-tier "Verify" application to an Edge-first architecture on Vercel, backed by AWS (S3, RDS, Lambda) for core services.
+
+**My Role**: Strategic teardown of legacy infrastructure and cleanup of bloated systems to ensure a lean transition.
+
+**Architecture Decisions**:
+
+- **Edge-First Deployment**: Leverage Vercel's Edge Network for global performance
+- **AWS Backend Services**: S3 for storage, RDS for databases, Lambda for serverless functions
+- **Incremental Migration**: Phased approach to reduce risk vs. big-bang migration
+- **Infrastructure as Code**: Automated provisioning and deployment pipelines
+
+## Outcome
+
+- **Cost Efficiency**: Achieved an **80% reduction** in infrastructure costs, freeing up engineering budget for feature development.
+
+- **Velocity**: Shifted from manual, multi-hour deployment windows to **near-instant Edge deployments**, enabling rapid iteration.
+
+- **Reliability**: Reduced the attack surface and failure points inherent in managing Windows Server instances, improving overall system stability.
+
+- **Scalability**: Transformed from handling 10K to 1M+ concurrent users with minimal infrastructure changes.

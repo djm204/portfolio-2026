@@ -1,0 +1,51 @@
+---
+title: "ADR-002: Implementation of Multi-Tiered Release Tracks"
+subtitle: Multi-tiered release pipeline for enterprise stability
+status: Completed
+timeline: 6 months
+impact: Customer retention, feature parity, risk mitigation
+---
+
+## Problem
+
+GlobalVision served high-value enterprise clients with varying risk tolerances. While some clients wanted the latest features immediately, others required extreme stability and "pinned" versions to satisfy their own internal compliance and QA cycles.
+
+**Key Challenges**:
+
+- **Conflicting Requirements**: Early adopters vs. compliance-focused enterprises
+- **Feature Velocity**: Need to ship rapidly without breaking production
+- **Customer Retention**: Risk of losing high-value clients due to forced updates
+- **QA Cycles**: Enterprise clients required extended testing periods
+
+## Solution
+
+I designed and implemented a three-track release system:
+
+### 1. Latest Track
+
+For internal testing and early-adopter clients. Immediate access to new features, rapid iteration and feedback cycles, lower stability requirements.
+
+### 2. Pinned N-1 Track
+
+The standard stable version for the majority of enterprise users. One version behind Latest, thoroughly tested and stable, standard enterprise deployment.
+
+### 3. Pinned N-2 Track
+
+A legacy stable track for high-compliance clients. Two versions behind Latest, long-term stability guarantee, extended support for compliance requirements.
+
+**Implementation Details**:
+
+- Release pipeline automation for all three tracks
+- Feature flag system for gradual rollouts
+- Automated testing at each track level
+- Clear documentation and client communication
+
+## Outcome
+
+- **Customer Retention**: High-value enterprise clients remained on the platform because we respected their need for stability, reducing churn risk.
+
+- **Feature Parity**: Enabled the engineering team to continue shipping to the "Latest" track without breaking production for "Pinned" users, maintaining development velocity.
+
+- **Risk Mitigation**: Isolated risk to specific client segments, allowing rapid iteration for early adopters while maintaining stability for compliance-focused clients.
+
+- **Operational Excellence**: Established clear processes for managing multiple release tracks, improving team efficiency.
