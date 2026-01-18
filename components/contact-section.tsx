@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTheme } from './theme-provider';
 
 /**
  * Contact Section Component
@@ -10,6 +11,8 @@ import Image from 'next/image';
  * Verification: Test link accessibility, responsive layout, hover effects
  */
 export function ContactSection(): JSX.Element {
+  const { theme } = useTheme();
+  
   const contactLinks = [
     {
       label: 'LinkedIn',
@@ -61,7 +64,7 @@ export function ContactSection(): JSX.Element {
               >
                 {link.icon === 'image' ? (
                   <Image
-                    src="/assets/linkedin-white.png"
+                    src={theme === 'dark' ? '/assets/linkedin-white.png' : '/assets/linkedin-black.png'}
                     alt="LinkedIn"
                     width={24}
                     height={24}

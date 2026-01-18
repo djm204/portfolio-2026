@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { AuthButton } from './auth-button';
+import { ThemeToggle } from './theme-toggle';
 import { useAuth } from './auth-provider';
 
 /**
@@ -60,7 +61,10 @@ export function Navigation(): JSX.Element {
                 );
               })}
             </ul>
-            {showAuth && <AuthButton />}
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              {showAuth && <AuthButton />}
+            </div>
           </div>
         </div>
       </div>

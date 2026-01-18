@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTheme } from './theme-provider';
 
 /**
  * Footer Component
@@ -8,13 +11,15 @@ import Image from 'next/image';
  * Should be minimal and accessible
  */
 export function Footer(): JSX.Element {
+  const { theme } = useTheme();
+
   return (
     <footer
       className="border-t border-border bg-subtle-bg py-8 px-4 mt-12"
       role="contentinfo"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-6">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-6">
           {/* Contact Links */}
           <div className="flex flex-wrap gap-6 items-center">
             <Link
@@ -24,7 +29,7 @@ export function Footer(): JSX.Element {
               className="text-sm text-text-muted hover:text-accent transition-colors flex items-center gap-2"
             >
               <Image
-                src="/assets/linkedin-white.png"
+                src={theme === 'dark' ? '/assets/linkedin-white.png' : '/assets/linkedin-black.png'}
                 alt="LinkedIn"
                 width={20}
                 height={20}
