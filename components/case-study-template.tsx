@@ -91,9 +91,7 @@ export function CaseStudyTemplate({
 
             {/* Sidebar */}
             <aside className="lg:col-span-4">
-              <div className="sticky top-24">
-                <CaseStudySidebar sections={sidebar} />
-              </div>
+              <CaseStudySidebar sections={sidebar} frontmatter={frontmatter} />
             </aside>
           </div>
         </div>

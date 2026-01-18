@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
+import type { CaseStudyFrontmatter } from '@/lib/types';
 
 interface CaseStudySidebarProps {
   sections: {
@@ -9,102 +9,172 @@ interface CaseStudySidebarProps {
     solution: string;
     outcome: string;
   };
+  frontmatter: CaseStudyFrontmatter;
 }
 
 /**
  * Case Study Sidebar Component
- * Verification: Test navigation, content extraction, responsive behavior
- * Should provide quick access to Problem/Solution/Outcome sections
+ * Industry standard: TLDR section with statistical highlights
+ * Verification: Test metric extraction, statistical display, responsive behavior
+ * 
+ * Displays key takeaways and statistics from the case study
  */
 export function CaseStudySidebar({
   sections,
+  frontmatter,
 }: CaseStudySidebarProps): JSX.Element {
-  const [activeSection, setActiveSection] = useState<
-    'problem' | 'solution' | 'outcome'
-  >('problem');
-
-  const extractText = (markdown: string): string => {
-    // Remove markdown headers and formatting
-    return markdown
-      .replace(/^##+ .+$/gm, '')
-      .replace(/\*\*/g, '')
-      .replace(/^[-*] /gm, '')
-      .trim()
-      .substring(0, 200);
+  /**
+   * Extract key statistics from outcome text
+   * Industry standard: Pattern matching for metrics extraction
+   */
+  const extractStatistics = (text: string): Array<{
+    label: string;
+    value: string;
+    icon: string;
+  }> => {
+    const stats: Array<{ label: string; value: string; icon: string }> = [];
+    
+    // Extract percentages (e.g., "80%", "90%+")
+    const percentageMatches = text.match(/(\d+\.?\d*)\s*%\+?/gi);
+    if (percentageMatches) {
+      percentageMatches.forEach((match) => {
+        const value = match.replace(/\s/g, '');
+        // Try to infer label from context
+        const context = text.substring(
+          Math.max(0, text.indexOf(match) - 50),
+          text.indexOf(match) + match.length + 50
+        ).toLowerCase();
+        
+        let label = 'Improvement';
+        if (context.includes('cost') || context.includes('reduction')) {
+          label = 'Cost Reduction';
+        } else if (context.includes('mttr') || context.includes('time')) {
+          label = 'MTTR Reduction';
+        } else if (context.includes('efficiency') || context.includes('performance')) {
+          label = 'Efficiency Gain';
+        }
+        
+        stats.push({ label, value, icon: '📊' });
+      });
+    }
+    
+    // Extract timeline
+    if (frontmatter.timeline) {
+      stats.push({
+        label: 'Timeline',
+        value: frontmatter.timeline,
+        icon: '⏱️',
+      });
+    }
+    
+    // Extract scale improvements (e.g., "10K to 1M+")
+    const scaleMatch = text.match(/(\d+[KMB]?)\s*(?:to|→)\s*(\d+[KMB]?\+?)/i);
+    if (scaleMatch) {
+      stats.push({
+        label: 'Scale',
+        value: `${scaleMatch[1]} → ${scaleMatch[2]}`,
+        icon: '📈',
+      });
+    }
+    
+    // Extract time improvements (e.g., "minutes rather than hours")
+    const timeMatch = text.match(/(minutes?|hours?|days?)\s+(?:rather than|instead of|vs\.?)\s+(minutes?|hours?|days?)/i);
+    if (timeMatch) {
+      stats.push({
+        label: 'Time Improvement',
+        value: `${timeMatch[1]} vs ${timeMatch[2]}`,
+        icon: '⚡',
+      });
+    }
+    
+    return stats.slice(0, 4); // Limit to top 4 stats
   };
 
-  const sectionsData = [
-    {
-      id: 'problem' as const,
-      title: 'Problem',
-      icon: '⚠️',
-      content: sections.problem ? extractText(sections.problem) : '',
-    },
-    {
-      id: 'solution' as const,
-      title: 'Solution',
-      icon: '🔧',
-      content: sections.solution ? extractText(sections.solution) : '',
-    },
-    {
-      id: 'outcome' as const,
-      title: 'Outcome',
-      icon: '✅',
-      content: sections.outcome ? extractText(sections.outcome) : '',
-    },
-  ];
+  const statistics = extractStatistics(sections.outcome || '');
+  
+  // Also extract key metrics from impact field
+  const impactStats: Array<{ label: string; value: string; icon: string }> = [];
+  if (frontmatter.impact) {
+    // Extract percentages from impact
+    const impactPercentages = frontmatter.impact.match(/(\d+\.?\d*)\s*%\+?/gi);
+    if (impactPercentages) {
+      impactPercentages.forEach((match) => {
+        const value = match.replace(/\s/g, '');
+        const context = frontmatter.impact.toLowerCase();
+        let label = 'Impact';
+        if (context.includes('cost')) label = 'Cost Savings';
+        if (context.includes('mttr') || context.includes('time')) label = 'Time Saved';
+        
+        if (!statistics.some(s => s.value === value)) {
+          impactStats.push({ label, value, icon: '🎯' });
+        }
+      });
+    }
+  }
+  
+  const allStats = [...statistics, ...impactStats].slice(0, 4);
 
   return (
     <div className="sticky top-24">
       <div className="gh-box">
         <h3 className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wide">
-          Quick Reference
+          TLDR
         </h3>
-        <nav className="space-y-2" aria-label="Case study sections">
-          {sectionsData.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => setActiveSection(section.id)}
-              className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                activeSection === section.id
-                  ? 'bg-accent/10 text-accent border border-accent/30'
-                  : 'text-text-muted hover:text-foreground hover:bg-subtle-bg'
-              }`}
-              aria-current={activeSection === section.id ? 'page' : undefined}
-            >
-              <div className="flex items-center gap-2">
-                <span>{section.icon}</span>
-                <span>{section.title}</span>
-              </div>
-            </button>
-          ))}
-        </nav>
+        
+        {/* Key Statistics */}
+        {allStats.length > 0 && (
+          <div className="space-y-3 mb-6">
+            {allStats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: index * 0.1 }}
+                className="p-3 bg-subtle-bg border border-border rounded-md"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2 flex-1">
+                    <span className="text-lg">{stat.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs text-text-muted uppercase tracking-wide mb-1">
+                        {stat.label}
+                      </div>
+                      <div className="text-lg font-bold text-foreground">
+                        {stat.value}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
 
-        {/* Active Section Preview */}
-        {sectionsData.find((s) => s.id === activeSection)?.content && (
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="mt-6 pt-6 border-t border-border"
-          >
-            <h4 className="text-xs font-semibold text-text-muted mb-2 uppercase tracking-wide">
-              {sectionsData.find((s) => s.id === activeSection)?.title} Summary
-            </h4>
-            <p className="text-xs text-text-secondary leading-relaxed">
-              {sectionsData.find((s) => s.id === activeSection)?.content}...
-            </p>
-          </motion.div>
+        {/* Status Badge */}
+        {frontmatter.status && (
+          <div className="mb-6 pb-6 border-b border-border">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-text-muted uppercase tracking-wide">
+                Status
+              </span>
+              <span className="px-2 py-1 text-xs font-semibold rounded bg-accent/10 text-accent border border-accent/30">
+                {frontmatter.status}
+              </span>
+            </div>
+          </div>
         )}
 
         {/* Scroll to Section Links */}
-        <div className="mt-6 pt-6 border-t border-border">
+        <div>
           <h4 className="text-xs font-semibold text-text-muted mb-3 uppercase tracking-wide">
             Jump to Section
           </h4>
           <div className="space-y-1.5">
-            {sectionsData.map((section) => (
+            {[
+              { id: 'problem', title: 'Problem', icon: '⚠️' },
+              { id: 'solution', title: 'Solution', icon: '🔧' },
+              { id: 'outcome', title: 'Outcome', icon: '✅' },
+            ].map((section) => (
               <a
                 key={section.id}
                 href={`#${section.id}`}
