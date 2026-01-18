@@ -1,0 +1,49 @@
+{
+  "name": "portfolio-2026",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run db:export && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "preview": "npx serve out",
+    "db:seed": "tsx scripts/seed-database.ts",
+    "db:export": "tsx scripts/export-db-to-json.ts",
+    "db:init": "tsx -e \"import('./lib/db').then(m => m.initializeDatabase())\""
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "@next/mdx": "^15.0.0",
+    "framer-motion": "^11.0.0",
+    "gray-matter": "^4.0.3",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@types/sql.js": "^1.4.9",
+    "autoprefixer": "^10.4.16",
+    "clsx": "^2.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.0.0",
+    "postcss": "^8.4.32",
+    "remark-gfm": "^4.0.1",
+    "sql.js": "^1.10.3",
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss": "^3.4.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "rimraf": "^5.0.0",
+    "glob": "^10.0.0"
+  }
+}
