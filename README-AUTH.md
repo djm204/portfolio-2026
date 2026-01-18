@@ -2,6 +2,12 @@
 
 This portfolio includes Google OAuth authentication for live content editing.
 
+## Quick Start
+
+**For local development:** See [LOCAL-SETUP.md](./LOCAL-SETUP.md) for detailed local setup instructions.
+
+**For production:** Follow the instructions below.
+
 ## Setup Instructions
 
 ### 1. Google OAuth Configuration
