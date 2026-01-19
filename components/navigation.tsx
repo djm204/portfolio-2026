@@ -1,10 +1,27 @@
 'use client';
 
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { AuthButton } from './auth-button';
 import { ThemeToggle } from './theme-toggle';
 import { useAuth } from './auth-provider';
+
+/**
+ * Auth Button Wrapper Component
+ * Handles search params check with Suspense boundary for static export
+ */
+function AuthButtonWrapper(): React.JSX.Element | null {
+  const searchParams = useSearchParams();
+  const { user } = useAuth();
+  
+  // Show auth button if:
+  // 1. User is signed in (always show sign-out option), OR
+  // 2. banana=true query parameter is present (show sign-in button)
+  const showAuth = user !== null || searchParams.get('banana') === 'true';
+  
+  return showAuth ? <AuthButton /> : null;
+}
 
 /**
  * Navigation Component
@@ -13,13 +30,6 @@ import { useAuth } from './auth-provider';
  */
 export function Navigation(): React.JSX.Element {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const { user } = useAuth();
-  
-  // Show auth button if:
-  // 1. User is signed in (always show sign-out option), OR
-  // 2. banana=true query parameter is present (show sign-in button)
-  const showAuth = user !== null || searchParams.get('banana') === 'true';
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -63,7 +73,9 @@ export function Navigation(): React.JSX.Element {
             </ul>
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              {showAuth && <AuthButton />}
+              <Suspense fallback={null}>
+                <AuthButtonWrapper />
+              </Suspense>
             </div>
           </div>
         </div>
