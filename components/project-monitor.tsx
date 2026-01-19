@@ -222,7 +222,7 @@ export function ProjectMonitor(): React.JSX.Element {
               </div>
 
               {/* Key Metrics */}
-              <div className="space-y-4">
+              <div className="space-y-4 flex-1">
                 {/* Uptime with Progress Bar */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
