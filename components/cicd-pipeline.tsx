@@ -171,7 +171,7 @@ export function CicdPipeline(): React.JSX.Element {
 
                 {/* Horizontal Connector - dot • line • dot (GitHub Actions-like) */}
                 {!isLast && (
-                  <div className="flex items-center justify-center flex-shrink-0 mx-3">
+                  <div className="flex items-center justify-center flex-shrink-0 mx-1.5">
                     <div className="flex items-center gap-1 text-border">
                       <div className="w-2 h-2 rounded-full bg-border" />
                       <div className="h-[2px] w-10 rounded-full bg-border" />
