@@ -363,7 +363,6 @@ export function ProjectMonitor(): React.JSX.Element {
                   <span className="text-xs font-medium text-foreground">
                     {new Date(project.lastDeployed).toLocaleDateString('en-US', {
                       month: 'short',
-                      day: 'numeric',
                       year: 'numeric',
                     })}
                   </span>
