@@ -200,6 +200,8 @@ export function ProjectMonitor(): React.JSX.Element {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
             >
               {/* Overlay for better text readability */}
               <div className="absolute inset-0 bg-background/80 backdrop-blur-[1px]" />
