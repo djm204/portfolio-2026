@@ -184,11 +184,20 @@ export function ProjectMonitor(): React.JSX.Element {
           {projects.map((project, index) => (
             <motion.div
               key={project.name}
-              className="gh-box hover:border-accent transition-all duration-200 hover:shadow-lg"
+              className="gh-box hover:border-accent transition-all duration-200 hover:shadow-lg relative overflow-hidden"
+              style={{
+                backgroundImage: 'url(/assets/panelbg-matrix.webp)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
+              {/* Overlay for better text readability */}
+              <div className="absolute inset-0 bg-background/80 backdrop-blur-[1px]" />
+              <div className="relative z-10">
               {/* Header with Status */}
               <div className="mb-5 pb-4 border-b border-border">
                 <div className="flex items-start justify-between mb-2">
@@ -359,6 +368,7 @@ export function ProjectMonitor(): React.JSX.Element {
                     })}
                   </span>
                 </div>
+              </div>
               </div>
             </motion.div>
           ))}
