@@ -101,12 +101,6 @@ export function CicdPipeline(): React.JSX.Element {
             const StatusIcon = getStatusIcon(step.status);
             const StepIcon = step.icon;
             const isLast = index === pipelineSteps.length - 1;
-            const connectorColor =
-              step.status === 'completed'
-                ? 'bg-success'
-                : step.status === 'pending'
-                  ? 'bg-warning'
-                  : 'bg-border';
 
             return (
               <div key={step.id} className="flex items-center">
@@ -175,10 +169,14 @@ export function CicdPipeline(): React.JSX.Element {
                   </p>
                 </motion.div>
 
-                {/* Horizontal Connector - pill style (GitHub Actions-like) */}
+                {/* Horizontal Connector - dot • line • dot (GitHub Actions-like) */}
                 {!isLast && (
                   <div className="flex items-center justify-center flex-shrink-0 mx-3">
-                    <div className={`h-2 w-10 rounded-full ${connectorColor}`} />
+                    <div className="flex items-center gap-1 text-border">
+                      <div className="w-2 h-2 rounded-full bg-border" />
+                      <div className="h-[2px] w-10 rounded-full bg-border" />
+                      <div className="w-2 h-2 rounded-full bg-border" />
+                    </div>
                   </div>
                 )}
               </div>
@@ -192,12 +190,6 @@ export function CicdPipeline(): React.JSX.Element {
             const StatusIcon = getStatusIcon(step.status);
             const StepIcon = step.icon;
             const isLast = index === pipelineSteps.length - 1;
-            const connectorColor =
-              step.status === 'completed'
-                ? 'bg-success'
-                : step.status === 'pending'
-                  ? 'bg-warning'
-                  : 'bg-border';
 
             return (
               <div key={step.id} className="flex flex-col items-stretch">
@@ -265,11 +257,12 @@ export function CicdPipeline(): React.JSX.Element {
                   </p>
                 </motion.div>
 
-                {/* Vertical Connector - pill style (GitHub Actions-like) */}
+                {/* Vertical Connector - dot • line • dot (GitHub Actions-like) */}
                 {!isLast && (
-                  <div className="flex flex-col items-center justify-center py-3">
-                    <div className={`w-1 h-6 rounded-full ${connectorColor}`} />
-                    <div className={`w-2 h-2 mt-1 rounded-full ${connectorColor}`} />
+                  <div className="flex flex-col items-center justify-center py-3 text-border">
+                    <div className="w-2 h-2 rounded-full bg-border" />
+                    <div className="w-[2px] h-6 rounded-full bg-border mt-1 mb-1" />
+                    <div className="w-2 h-2 rounded-full bg-border" />
                   </div>
                 )}
               </div>
