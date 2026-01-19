@@ -9,6 +9,7 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "preview": "npx serve out",
+    "deploy": "npx wrangler pages deploy out",
     "db:seed": "tsx scripts/seed-database.ts",
     "db:export": "tsx scripts/export-db-to-json.ts",
     "db:init": "tsx -e \"import('./lib/db').then(m => m.initializeDatabase())\""
