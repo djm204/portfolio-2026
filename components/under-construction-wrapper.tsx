@@ -43,15 +43,16 @@ export function UnderConstructionWrapper({
   }
 
   // If under construction is enabled, show the construction page
+  // Navigation and Footer remain visible (they're outside this wrapper)
   if (isUnderConstruction) {
     return (
-      <main className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <ErrorBoundary>
             <CicdPipeline />
           </ErrorBoundary>
         </div>
-      </main>
+      </div>
     );
   }
 
