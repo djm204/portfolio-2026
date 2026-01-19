@@ -5,13 +5,14 @@ export interface ProjectMetrics {
   name: string;
   description: string;
   status: 'operational' | 'degraded' | 'maintenance';
-  uptime: number;
-  responseTime: number; // ms
-  errorRate: number; // percentage
-  costPerMonth: number;
-  costReduction: number; // percentage
-  requestsPerDay: number;
-  p95Latency: number; // ms
+  // Contribution-focused metrics
+  role: string; // e.g., "Lead Engineer", "Architect", "Tech Lead"
+  timeline: string; // e.g., "6 months", "Q2 2024"
+  costReduction?: number; // percentage (if applicable)
+  costSavings?: number; // dollar amount saved per month/year
+  teamSize?: number; // team size worked with
+  technologiesMigrated?: number; // number of technologies/platforms migrated
+  architectureDecisions?: number; // key architectural decisions made
   lastDeployed: string;
   techStack: string[];
 }

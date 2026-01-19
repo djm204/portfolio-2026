@@ -18,19 +18,18 @@ export function ProjectMonitor(): React.JSX.Element {
     const fetchProjects = async (): Promise<void> => {
       await new Promise((resolve) => setTimeout(resolve, 800));
 
-      // Projects from resume - GlobalVision and Bold Commerce work
+      // Projects with contribution-focused metrics
       const mockProjects: ProjectMetrics[] = [
         {
           name: 'GlobalVision Infrastructure',
           description: 'Legacy Windows/C++ → Vercel/AWS Edge-first migration',
           status: 'operational',
-          uptime: 99.97,
-          responseTime: 145,
-          errorRate: 0.02,
-          costPerMonth: 2800,
+          role: 'Lead Architect',
+          timeline: '6 months',
           costReduction: 80,
-          requestsPerDay: 3200000,
-          p95Latency: 298,
+          costSavings: 14000, // $14k/month savings
+          technologiesMigrated: 5, // Windows → Linux, C++ → Node.js, etc.
+          architectureDecisions: 12, // Key architectural decisions
           lastDeployed: new Date('2024-04-22').toISOString(),
           techStack: ['Next.js', 'Vercel', 'AWS', 'Node.js', 'TypeScript'],
         },
@@ -38,27 +37,22 @@ export function ProjectMonitor(): React.JSX.Element {
           name: 'Release Track System',
           description: 'Multi-tiered release pipeline (Latest, N-1, N-2) for enterprise stability',
           status: 'operational',
-          uptime: 99.99,
-          responseTime: 92,
-          errorRate: 0.01,
-          costPerMonth: 0,
-          costReduction: 0,
-          requestsPerDay: 450000,
-          p95Latency: 185,
-          lastDeployed: new Date('2025-05-30').toISOString(),
+          role: 'Tech Lead',
+          timeline: '3 months',
+          teamSize: 4,
+          architectureDecisions: 8, // Release strategy, deployment architecture
+          lastDeployed: new Date('2024-05-30').toISOString(),
           techStack: ['Vercel', 'RDS', 'NestJS', 'React', 'GitHub Actions'],
         },
         {
           name: 'Observability Standardization',
           description: 'Axiom + Sentry integration for unified logging, monitoring, and error tracking',
           status: 'operational',
-          uptime: 99.98,
-          responseTime: 45,
-          errorRate: 0.005,
-          costPerMonth: 0,
-          costReduction: 0,
-          requestsPerDay: 5200000,
-          p95Latency: 120,
+          role: 'Staff Engineer',
+          timeline: '2 months',
+          teamSize: 6,
+          technologiesMigrated: 2, // Multiple tools → Axiom + Sentry
+          architectureDecisions: 6, // Observability patterns, error tracking strategy
           lastDeployed: new Date('2024-08-15').toISOString(),
           techStack: ['Axiom', 'Sentry', 'Next.js', 'TypeScript', 'Observability'],
         },
@@ -66,13 +60,10 @@ export function ProjectMonitor(): React.JSX.Element {
           name: 'Staples Enterprise',
           description: 'Lead Frontend - Multi-million dollar React-based e-commerce platform (2020-2021)',
           status: 'maintenance',
-          uptime: 99.95,
-          responseTime: 178,
-          errorRate: 0.03,
-          costPerMonth: 0,
-          costReduction: 0,
-          requestsPerDay: 8500000,
-          p95Latency: 342,
+          role: 'Lead Frontend Engineer',
+          timeline: '18 months',
+          teamSize: 12,
+          architectureDecisions: 15, // Component architecture, state management, performance
           lastDeployed: new Date('2020-07-31').toISOString(),
           techStack: ['React', 'TypeScript', 'REST API'],
         },
@@ -137,35 +128,8 @@ export function ProjectMonitor(): React.JSX.Element {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(amount);
-  };
-
-  const formatNumber = (num: number): string => {
-    if (num >= 1000000) {
-      return `${(num / 1000000).toFixed(1)}M`;
-    }
-    if (num >= 1000) {
-      return `${(num / 1000).toFixed(1)}K`;
-    }
-    return num.toString();
-  };
-
-  const getUptimeColor = (uptime: number): string => {
-    if (uptime >= 99.99) return 'text-success';
-    if (uptime >= 99.9) return 'text-success';
-    if (uptime >= 99.5) return 'text-warning';
-    return 'text-danger';
-  };
-
-  const getResponseTimeColor = (time: number): string => {
-    if (time < 100) return 'text-success';
-    if (time < 200) return 'text-accent';
-    if (time < 300) return 'text-warning';
-    return 'text-danger';
-  };
-
-  const getUptimeProgress = (uptime: number): number => {
-    return (uptime / 100) * 100;
   };
 
   return (
@@ -173,10 +137,10 @@ export function ProjectMonitor(): React.JSX.Element {
       <div className="max-w-7xl mx-auto">
         <div className="mb-6">
           <h2 className="text-2xl font-semibold text-foreground mb-2">
-            Live Project Metrics
+            Project Contributions
           </h2>
           <p className="text-text-muted text-sm">
-            Real-time monitoring of systems I&apos;ve architected and deployed
+            Key projects I&apos;ve led, architected, and delivered
           </p>
         </div>
 
@@ -201,8 +165,7 @@ export function ProjectMonitor(): React.JSX.Element {
                 backgroundRepeat: 'no-repeat',
               }}
               */}
-              {/* Overlay for better text readability */}
-              <div className="absolute inset-0 bg-background/80 backdrop-blur-[1px]" />
+              {/* Overlay removed - no background image */}
               <div className="relative z-10 flex flex-col h-full">
               {/* Header with Status */}
               <div className="mb-5 pb-4 border-b border-border">
@@ -229,103 +192,80 @@ export function ProjectMonitor(): React.JSX.Element {
 
               {/* Key Metrics */}
               <div className="space-y-4 flex-1">
-                {/* Uptime with Progress Bar */}
-                <div>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-medium text-text-muted uppercase tracking-wide">
-                      Uptime
-                    </span>
-                    <span className={`text-sm font-bold ${getUptimeColor(project.uptime)}`}>
-                      {project.uptime}%
-                    </span>
-                  </div>
-                  <div className="h-2 bg-subtle-bg rounded-full overflow-hidden">
-                    <motion.div
-                      className={`h-full ${
-                        project.uptime >= 99.9
-                          ? 'bg-success'
-                          : project.uptime >= 99.5
-                            ? 'bg-warning'
-                            : 'bg-danger'
-                      }`}
-                      initial={{ width: 0 }}
-                      animate={{ width: `${getUptimeProgress(project.uptime)}%` }}
-                      transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
-                    />
-                  </div>
-                </div>
-
-                {/* Performance Metrics Grid */}
+                {/* Role & Timeline */}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-subtle-bg rounded p-2.5 border border-border">
                     <div className="text-xs text-text-muted mb-1 uppercase tracking-wide">
-                      Response
+                      Role
                     </div>
-                    <div
-                      className={`text-lg font-bold ${getResponseTimeColor(project.responseTime)}`}
-                    >
-                      {project.responseTime}
-                      <span className="text-xs font-normal text-text-muted ml-0.5">
-                        ms
-                      </span>
+                    <div className="text-sm font-bold text-foreground">
+                      {project.role}
                     </div>
                   </div>
                   <div className="bg-subtle-bg rounded p-2.5 border border-border">
                     <div className="text-xs text-text-muted mb-1 uppercase tracking-wide">
-                      P95 Latency
+                      Timeline
                     </div>
-                    <div
-                      className={`text-lg font-bold ${getResponseTimeColor(project.p95Latency)}`}
-                    >
-                      {project.p95Latency}
-                      <span className="text-xs font-normal text-text-muted ml-0.5">
-                        ms
-                      </span>
+                    <div className="text-sm font-bold text-foreground">
+                      {project.timeline}
                     </div>
                   </div>
                 </div>
 
-                {/* Error Rate */}
-                <div className="bg-subtle-bg rounded p-2.5 border border-border">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-text-muted uppercase tracking-wide">
-                      Error Rate
-                    </span>
-                    <span className="text-base font-bold text-success">
-                      {project.errorRate}%
-                    </span>
-                  </div>
-                </div>
-
-                {/* Throughput */}
-                <div className="bg-subtle-bg rounded p-2.5 border border-border">
-                  <div className="text-xs text-text-muted mb-1 uppercase tracking-wide">
-                    Daily Requests
-                  </div>
-                  <div className="text-base font-bold text-foreground">
-                    {formatNumber(project.requestsPerDay)}
-                    <span className="text-xs font-normal text-text-muted ml-1">
-                      /day
-                    </span>
-                  </div>
-                </div>
-
-                {/* Cost Metrics - The "80% Rule" in action */}
-                {project.costReduction > 0 && (
+                {/* Cost Savings - The "80% Rule" in action */}
+                {project.costReduction && project.costReduction > 0 && (
                   <div className="bg-subtle-bg rounded p-2.5 border border-success/40">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs text-text-muted uppercase tracking-wide">
-                        Monthly Cost
+                        Cost Savings
                       </span>
                       <span className="text-xs font-bold text-success px-1.5 py-0.5 rounded bg-success/20">
                         -{project.costReduction}%
                       </span>
                     </div>
                     <div className="text-base font-bold text-foreground">
-                      {formatCurrency(project.costPerMonth)}
-                      <span className="text-xs font-normal text-text-muted ml-1.5 line-through opacity-60">
-                        {formatCurrency(project.costPerMonth * 5)}
+                      {project.costSavings ? formatCurrency(project.costSavings) : 'N/A'}
+                      <span className="text-xs font-normal text-text-muted ml-1">
+                        /month
                       </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Team Size */}
+                {project.teamSize && (
+                  <div className="bg-subtle-bg rounded p-2.5 border border-border">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-text-muted uppercase tracking-wide">
+                        Team Size
+                      </span>
+                      <span className="text-base font-bold text-foreground">
+                        {project.teamSize}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Technologies Migrated */}
+                {project.technologiesMigrated && (
+                  <div className="bg-subtle-bg rounded p-2.5 border border-border">
+                    <div className="text-xs text-text-muted mb-1 uppercase tracking-wide">
+                      Technologies Migrated
+                    </div>
+                    <div className="text-base font-bold text-foreground">
+                      {project.technologiesMigrated}
+                    </div>
+                  </div>
+                )}
+
+                {/* Architecture Decisions */}
+                {project.architectureDecisions && (
+                  <div className="bg-subtle-bg rounded p-2.5 border border-border">
+                    <div className="text-xs text-text-muted mb-1 uppercase tracking-wide">
+                      Architecture Decisions
+                    </div>
+                    <div className="text-base font-bold text-foreground">
+                      {project.architectureDecisions}
                     </div>
                   </div>
                 )}
