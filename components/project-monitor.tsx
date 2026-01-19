@@ -58,6 +58,17 @@ export function ProjectMonitor(): React.JSX.Element {
           techStack: ['Axiom', 'Sentry', 'Next.js', 'TypeScript', 'Observability'],
         },
         {
+          name: 'Internal Tooling & Security',
+          description: 'Custom Retool admin portal for Auth0 user/org management, enabling Customer Service autonomy while enforcing Principle of Least Privilege',
+          status: 'operational',
+          role: 'Staff Engineer',
+          timeline: '3 months',
+          teamSize: 3,
+          architectureDecisions: 5, // Security patterns, PoLP implementation, API design
+          lastDeployed: new Date('2024-06-15').toISOString(),
+          techStack: ['Retool', 'Auth0', 'REST API', 'Security'],
+        },
+        {
           name: 'Staples Enterprise',
           description: 'Lead Frontend - Multi-million dollar React-based e-commerce platform (2020-2021)',
           status: 'maintenance',
@@ -85,7 +96,7 @@ export function ProjectMonitor(): React.JSX.Element {
       <section className="py-6 sm:py-8 px-4" aria-label="Project monitoring">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
-            {[...Array(4)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <div
                 key={i}
                 className="gh-box animate-pulse"
