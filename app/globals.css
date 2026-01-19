@@ -111,96 +111,110 @@ body {
   padding: 16px;
 }
 
-/* Terminal/Unix color scheme for tags */
+/* Terminal/Unix color scheme for tags - Solid, non-transparent backgrounds */
 .tag-terminal-green {
-  background-color: #1e4620;
+  background-color: #1e4620 !important;
   color: #4ade80;
   border: 1px solid #22c55e;
   font-weight: 600;
+  opacity: 1;
 }
 
 .tag-terminal-yellow {
-  background-color: #422006;
+  background-color: #422006 !important;
   color: #fbbf24;
   border: 1px solid #f59e0b;
   font-weight: 600;
+  opacity: 1;
 }
 
 .tag-terminal-blue {
-  background-color: #1e3a5f;
+  background-color: #1e3a5f !important;
   color: #60a5fa;
   border: 1px solid #3b82f6;
   font-weight: 600;
+  opacity: 1;
 }
 
 .tag-terminal-cyan {
-  background-color: #164e63;
+  background-color: #164e63 !important;
   color: #22d3ee;
   border: 1px solid #06b6d4;
   font-weight: 600;
+  opacity: 1;
 }
 
 .tag-terminal-magenta {
-  background-color: #4a1e3d;
+  background-color: #4a1e3d !important;
   color: #f472b6;
   border: 1px solid #ec4899;
   font-weight: 600;
+  opacity: 1;
 }
 
 .tag-terminal-orange {
-  background-color: #431407;
+  background-color: #431407 !important;
   color: #fb923c;
   border: 1px solid #f97316;
   font-weight: 600;
+  opacity: 1;
 }
 
 .tag-terminal-purple {
-  background-color: #3b1e4a;
+  background-color: #3b1e4a !important;
   color: #a78bfa;
   border: 1px solid #8b5cf6;
   font-weight: 600;
+  opacity: 1;
 }
 
 [data-theme='dark'] .tag-terminal-green {
-  background-color: #0f2e15;
+  background-color: #0f2e15 !important;
   color: #4ade80;
   border: 1px solid #22c55e;
+  opacity: 1;
 }
 
 [data-theme='dark'] .tag-terminal-yellow {
-  background-color: #2d1b06;
+  background-color: #2d1b06 !important;
   color: #fbbf24;
   border: 1px solid #f59e0b;
+  opacity: 1;
 }
 
 [data-theme='dark'] .tag-terminal-blue {
-  background-color: #0f1f3f;
+  background-color: #0f1f3f !important;
   color: #60a5fa;
   border: 1px solid #3b82f6;
+  opacity: 1;
 }
 
 [data-theme='dark'] .tag-terminal-cyan {
-  background-color: #0a2e3f;
+  background-color: #0a2e3f !important;
   color: #22d3ee;
   border: 1px solid #06b6d4;
+  opacity: 1;
 }
 
 [data-theme='dark'] .tag-terminal-magenta {
-  background-color: #2d0f25;
+  background-color: #2d0f25 !important;
   color: #f472b6;
   border: 1px solid #ec4899;
+  opacity: 1;
 }
 
 [data-theme='dark'] .tag-terminal-orange {
-  background-color: #2d0a07;
+  background-color: #2d0a07 !important;
   color: #fb923c;
   border: 1px solid #f97316;
+  opacity: 1;
 }
 
 [data-theme='dark'] .tag-terminal-purple {
-  background-color: #25102d;
+  background-color: #25102d !important;
   color: #a78bfa;
   border: 1px solid #8b5cf6;
+  opacity: 1;
 }
 
 /* Fallback to system preference if no theme is set */

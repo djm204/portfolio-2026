@@ -28,7 +28,7 @@ NEXT_PUBLIC_GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID_HERE"
 # Set to "true", "1", or "enabled" to enable under construction page
 # Set to empty string, "false", or omit to disable
 NEXT_PUBLIC_UNDER_CONSTRUCTION = "true"
-
+NEXT_PUBLIC_DISABLE_ANALYTICS_ON_UNDER_CONSTRUCTION=true
 # Environment-specific variables (optional)
 # [env.preview.vars]
 # NEXT_PUBLIC_GOOGLE_CLIENT_ID = "preview-client-id"
