@@ -323,50 +323,50 @@ export function ProjectMonitor(): React.JSX.Element {
                     </div>
                   </div>
                 )}
+              </div>
 
-                {/* Tech Stack with Terminal Colors */}
-                <div className="pt-2 border-t border-border">
-                  <div className="text-xs text-text-muted mb-2 uppercase tracking-wide">
-                    Tech Stack
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.techStack.map((tech, techIndex) => {
-                      // Terminal color rotation for visual variety
-                      const colorClasses = [
-                        'tag-terminal-green',
-                        'tag-terminal-blue',
-                        'tag-terminal-cyan',
-                        'tag-terminal-yellow',
-                        'tag-terminal-magenta',
-                        'tag-terminal-orange',
-                        'tag-terminal-purple',
-                      ];
-                      const colorClass =
-                        colorClasses[techIndex % colorClasses.length];
-                      return (
-                        <span
-                          key={tech}
-                          className={`text-xs px-2 py-1 rounded font-medium ${colorClass}`}
-                        >
-                          {tech}
-                        </span>
-                      );
-                    })}
-                  </div>
+              {/* Tech Stack with Terminal Colors - Pinned to bottom */}
+              <div className="pt-2 border-t border-border mt-auto">
+                <div className="text-xs text-text-muted mb-2 uppercase tracking-wide">
+                  Tech Stack
                 </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.techStack.map((tech, techIndex) => {
+                    // Terminal color rotation for visual variety
+                    const colorClasses = [
+                      'tag-terminal-green',
+                      'tag-terminal-blue',
+                      'tag-terminal-cyan',
+                      'tag-terminal-yellow',
+                      'tag-terminal-magenta',
+                      'tag-terminal-orange',
+                      'tag-terminal-purple',
+                    ];
+                    const colorClass =
+                      colorClasses[techIndex % colorClasses.length];
+                    return (
+                      <span
+                        key={tech}
+                        className={`text-xs px-2 py-1 rounded font-medium ${colorClass}`}
+                      >
+                        {tech}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
 
-                {/* Deployed */}
-                <div className="pt-2 border-t border-border flex items-center justify-between">
-                  <span className="text-xs text-text-muted uppercase tracking-wide">
-                    Deployed
-                  </span>
-                  <span className="text-xs font-medium text-foreground">
-                    {new Date(project.lastDeployed).toLocaleDateString('en-US', {
-                      month: 'short',
-                      year: 'numeric',
-                    })}
-                  </span>
-                </div>
+              {/* Deployed - Pinned to bottom */}
+              <div className="pt-2 border-t border-border flex items-center justify-between mt-auto">
+                <span className="text-xs text-text-muted uppercase tracking-wide">
+                  Deployed
+                </span>
+                <span className="text-xs font-medium text-foreground">
+                  {new Date(project.lastDeployed).toLocaleDateString('en-US', {
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                </span>
               </div>
               </div>
             </motion.div>
