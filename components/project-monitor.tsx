@@ -192,9 +192,15 @@ export function ProjectMonitor(): React.JSX.Element {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
             >
+              {/* Background image commented out - can be restored if needed
+              style={{
+                backgroundImage: 'url(/assets/panelbg-matrix.webp)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+              */}
               {/* Overlay for better text readability */}
               <div className="absolute inset-0 bg-background/80 backdrop-blur-[1px]" />
               <div className="relative z-10 flex flex-col h-full">
