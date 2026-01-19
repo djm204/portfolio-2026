@@ -46,7 +46,7 @@ export function ProjectMonitor(): React.JSX.Element {
           requestsPerDay: 450000,
           p95Latency: 185,
           lastDeployed: new Date('2025-05-30').toISOString(),
-          techStack: ['React', 'Nest.js', 'Docker', 'Kubernetes', 'CI/CD'],
+          techStack: ['Vercel', 'RDS', 'NestJS', 'React', 'GitHub Actions'],
         },
         {
           name: 'Staples Enterprise',
