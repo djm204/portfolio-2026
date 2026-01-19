@@ -34,22 +34,30 @@ Cloudflare KV stores content overrides that allow you to edit case study content
 
 ### Step 2: Bind KV Namespace to Your Pages Project
 
-1. **Go to Your Pages Project**
-   - Navigate to "Workers & Pages" → "Pages"
-   - Click on your project: `portfolio-2026`
+**Important:** For this project, bindings are managed through `wrangler.toml` (as indicated in the Cloudflare Dashboard).
 
-2. **Open Settings**
-   - Click on "Settings" tab at the top
+1. **Get Your Namespace ID**
+   - Go to Cloudflare Dashboard → Workers & Pages → KV
+   - Find your `CONTENT_KV` namespace
+   - **Copy the Namespace ID** (it looks like: `abc123def456ghi789jkl012mno345`)
 
-3. **Go to Functions Section**
-   - Scroll down to the "Functions" section
-   - Look for "KV namespace bindings" or "Bindings"
+2. **Update `wrangler.toml`**
+   - Open `wrangler.toml` in your project root
+   - Find the `[[kv_namespaces]]` section (or add it if it doesn't exist)
+   - Replace `YOUR_NAMESPACE_ID` with your actual namespace ID:
+     ```toml
+     [[kv_namespaces]]
+     binding = "CONTENT_KV"
+     id = "your-actual-namespace-id-here"
+     ```
+   - Save the file
 
-4. **Add KV Namespace Binding**
-   - Click "Add binding" or "Edit bindings"
-   - **Variable name:** `CONTENT_KV` (must match exactly - case sensitive!)
-   - **KV namespace:** Select your namespace from the dropdown (or paste the Namespace ID)
-   - Click "Save" or "Add"
+3. **Commit and Deploy**
+   - Commit the updated `wrangler.toml` to your repository
+   - Push to trigger a new deployment
+   - Cloudflare Pages will automatically use the bindings from `wrangler.toml`
+
+**Alternative (if dashboard allows):** If the Cloudflare Dashboard shows an "Add binding" button (not all projects use `wrangler.toml`), you can add it there instead. Check the tooltip in the Bindings section - if it says bindings are managed through `wrangler.toml`, use the method above.
 
 ### Step 3: Verify the Setup
 
