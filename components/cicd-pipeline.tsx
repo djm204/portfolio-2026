@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle2, Circle, Loader2, GitBranch, Wrench, TestTube, Rocket, BarChart3 } from 'lucide-react';
+import { CheckCircle2, Circle, Loader2, GitBranch, Wrench, Rocket, BarChart3 } from 'lucide-react';
 
 /**
  * CI/CD Pipeline Component
@@ -27,18 +27,11 @@ const pipelineSteps: PipelineStep[] = [
     status: 'completed',
   },
   {
-    id: 'build',
-    name: 'Build',
-    description: 'Next.js static export, MDX compilation, database export',
+    id: 'build-test',
+    name: 'Build & Test',
+    description: 'Next.js static export, MDX compilation, TypeScript validation, ESLint',
     icon: Wrench,
     status: 'in-progress', // Under development
-  },
-  {
-    id: 'test',
-    name: 'Test',
-    description: 'TypeScript validation, ESLint, type checking',
-    icon: TestTube,
-    status: 'pending',
   },
   {
     id: 'deploy',
@@ -75,7 +68,7 @@ export function CicdPipeline(): React.JSX.Element {
       case 'in-progress':
         return 'text-accent border-accent/40 bg-accent/10';
       case 'pending':
-        return 'text-text-muted border-border bg-subtle-bg';
+        return 'text-warning border-warning/40 bg-warning/10';
     }
   };
 
@@ -108,7 +101,7 @@ export function CicdPipeline(): React.JSX.Element {
             const StatusIcon = getStatusIcon(step.status);
             const StepIcon = step.icon;
             const isLast = index === pipelineSteps.length - 1;
-            const connectorColor = step.status === 'completed' ? 'success' : 'border';
+            const connectorColor = step.status === 'completed' ? 'success' : step.status === 'pending' ? 'warning' : 'border';
 
             return (
               <div key={step.id} className="flex items-center">
@@ -131,7 +124,7 @@ export function CicdPipeline(): React.JSX.Element {
                           ? 'bg-[#1a7f37] text-white border-[#1a7f37]'
                           : step.status === 'in-progress'
                             ? 'bg-[#0969da] text-white border-[#0969da]'
-                            : 'bg-[#57606a] text-white border-[#57606a]'
+                            : 'bg-[#9a6700] text-white border-[#9a6700]'
                       }`}
                       style={{ opacity: 1 }}
                     >
@@ -152,7 +145,7 @@ export function CicdPipeline(): React.JSX.Element {
                           ? 'bg-success/30'
                           : step.status === 'in-progress'
                             ? 'bg-accent/30'
-                            : 'bg-subtle-bg'
+                            : 'bg-warning/30'
                       }`}
                     >
                       <StepIcon
@@ -161,7 +154,7 @@ export function CicdPipeline(): React.JSX.Element {
                             ? 'text-success'
                             : step.status === 'in-progress'
                               ? 'text-accent'
-                              : 'text-text-muted'
+                              : 'text-warning'
                         }`}
                       />
                     </div>
@@ -181,30 +174,51 @@ export function CicdPipeline(): React.JSX.Element {
                 {/* Connector Arrow - Horizontal for all screen sizes */}
                 {!isLast && (
                   <div className="flex items-center justify-center flex-shrink-0 mx-2">
-                    <div className="flex items-center relative">
-                      {/* Line */}
-                      <motion.div
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
+                    <motion.svg
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                      width="80"
+                      height="20"
+                      viewBox="0 0 80 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="overflow-visible"
+                    >
+                      {/* Arrow Line */}
+                      <motion.line
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
                         transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                        className={`h-2 w-16 ${
+                        x1="0"
+                        y1="10"
+                        x2="60"
+                        y2="10"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        stroke={
                           connectorColor === 'success'
-                            ? 'bg-success'
-                            : 'bg-border'
-                        }`}
+                            ? 'var(--success)'
+                            : connectorColor === 'warning'
+                              ? 'var(--warning)'
+                              : 'var(--border)'
+                        }
                       />
                       {/* Arrow Head */}
-                      <motion.div
+                      <motion.polygon
                         initial={{ opacity: 0, x: -5 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: index * 0.1 + 0.6 }}
-                        className={`absolute right-0 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[12px] ${
+                        points="60,5 75,10 60,15"
+                        fill={
                           connectorColor === 'success'
-                            ? 'border-l-success'
-                            : 'border-l-border'
-                        }`}
+                            ? 'var(--success)'
+                            : connectorColor === 'warning'
+                              ? 'var(--warning)'
+                              : 'var(--border)'
+                        }
                       />
-                    </div>
+                    </motion.svg>
                   </div>
                 )}
               </div>
@@ -219,12 +233,12 @@ export function CicdPipeline(): React.JSX.Element {
           <Loader2 className="w-6 h-6 text-accent animate-spin shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-foreground mb-2 text-lg">
-              Currently In Progress: Build Step
+              Currently In Progress: Build & Test Step
             </h3>
             <p className="text-sm text-text-muted leading-relaxed">
               Working on optimizing the build process, MDX compilation, database export workflows,
-              and static site generation. This includes fine-tuning Next.js build configuration and
-              ensuring efficient content compilation.
+              TypeScript validation, and ESLint configuration. This includes fine-tuning Next.js build
+              configuration and ensuring efficient content compilation and code quality checks.
             </p>
           </div>
         </div>
