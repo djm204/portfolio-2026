@@ -21,10 +21,10 @@ id = "6135ddb2170c4f59803de8d364869c0e"
 # Note: For Next.js static exports, NEXT_PUBLIC_* variables must ALSO be set in
 # Cloudflare Pages Dashboard → Settings → Environment variables for build-time.
 # wrangler.toml vars are available at runtime for Pages Functions.
+# ADMIN_EMAIL should be set in Cloudflare Pages dashboard, not here, to avoid binding conflicts.
 [vars]
 # Replace with your actual Google OAuth Client ID
 NEXT_PUBLIC_GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID_HERE"
-ADMIN_EMAIL = "me@davidmendez.dev"
 # Set to "true", "1", or "enabled" to enable under construction page
 # Set to empty string, "false", or omit to disable
 NEXT_PUBLIC_UNDER_CONSTRUCTION = "true"
