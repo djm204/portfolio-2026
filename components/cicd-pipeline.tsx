@@ -85,11 +85,11 @@ export function CicdPipeline(): React.JSX.Element {
 
   return (
     <div className="w-full">
-      <div className="mb-12 text-center">
-        <h2 className="text-3xl font-bold text-foreground mb-2">
+      <div className="mb-8 sm:mb-12 text-center px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
           Portfolio CI/CD Pipeline
         </h2>
-        <p className="text-text-muted">
+        <p className="text-sm sm:text-base text-text-muted">
           Current build and deployment workflow
         </p>
       </div>
@@ -109,7 +109,7 @@ export function CicdPipeline(): React.JSX.Element {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className={`relative w-[240px] border rounded-lg p-5 bg-subtle-bg ${
+                  className={`relative w-[220px] sm:w-[240px] border rounded-lg p-4 sm:p-5 bg-subtle-bg ${
                     step.status === 'in-progress'
                       ? 'ring-2 ring-accent ring-offset-2 ring-offset-background shadow-lg'
                       : 'shadow-sm'
@@ -159,19 +159,19 @@ export function CicdPipeline(): React.JSX.Element {
                   </div>
 
                   {/* Step Name */}
-                  <h3 className="text-lg font-semibold text-foreground mb-2 text-center">
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2 text-center">
                     {step.name}
                   </h3>
 
                   {/* Step Description */}
-                  <p className="text-xs text-text-muted text-center leading-relaxed">
+                  <p className="text-[10px] sm:text-xs text-text-muted text-center leading-relaxed">
                     {step.description}
                   </p>
                 </motion.div>
 
                 {/* Horizontal Connector - dot • line • dot (GitHub Actions-like) */}
                 {!isLast && (
-                  <div className="flex items-center justify-center flex-shrink-0 mx-0">
+                  <div className="flex items-center justify-center shrink-0 mx-0">
                     <div className="flex items-center gap-0.5 text-border">
                       <div className="w-2 h-2 rounded-full bg-border" />
                       <div className="w-12 h-2 rounded-full bg-border" />
@@ -272,14 +272,14 @@ export function CicdPipeline(): React.JSX.Element {
       </div>
 
       {/* Current Status Info */}
-      <div className="mt-10 p-5 bg-accent/10 border border-accent/40 rounded-lg">
-        <div className="flex items-start gap-4">
-          <Loader2 className="w-6 h-6 text-accent animate-spin shrink-0 mt-0.5" />
+      <div className="mt-8 sm:mt-10 p-4 sm:p-5 bg-accent/10 border border-accent/40 rounded-lg mx-4 sm:mx-0">
+        <div className="flex items-start gap-3 sm:gap-4">
+          <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 text-accent animate-spin shrink-0 mt-0.5" />
           <div>
-            <h3 className="font-semibold text-foreground mb-2 text-lg">
+            <h3 className="font-semibold text-foreground mb-2 text-base sm:text-lg">
               Currently In Progress: Build & Test Step
             </h3>
-            <p className="text-sm text-text-muted leading-relaxed">
+            <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
               Working on optimizing the build process, MDX compilation, database export workflows,
               TypeScript validation, and ESLint configuration. This includes fine-tuning Next.js build
               configuration and ensuring efficient content compilation and code quality checks.

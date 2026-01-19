@@ -37,13 +37,13 @@ export function GitHubHero(): React.JSX.Element {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">
                 David Josef Mendez
               </h1>
-              <p className="text-xl text-text-muted mb-4">
+              <p className="text-lg sm:text-xl text-text-muted mb-4">
                 Staff/Senior Software Engineer | Full-Stack & Infrastructure Pragmatist
               </p>
-              <p className="text-text-secondary mb-6 max-w-2xl">
+              <p className="text-sm sm:text-base text-text-secondary mb-6 max-w-2xl">
                 Staff/Senior-level Software Engineer with 11 years of experience building
                 resilient, high-availability systems. Specialist in infrastructure
                 modernization, enterprise-grade release management, and cost optimization.
@@ -52,19 +52,19 @@ export function GitHubHero(): React.JSX.Element {
               </p>
 
               {/* Stats */}
-              <div className="flex flex-wrap gap-6 mb-6">
+              <div className="flex flex-wrap gap-4 sm:gap-6 mb-6">
                 {stats.map((stat, index) => (
                   <motion.div
                     key={stat.label}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-                    className="flex items-baseline gap-2"
+                    className="flex items-baseline gap-1.5 sm:gap-2"
                   >
-                    <span className="text-2xl font-bold text-foreground">
+                    <span className="text-xl sm:text-2xl font-bold text-foreground">
                       {stat.value}
                     </span>
-                    <span className="text-sm text-text-muted">{stat.label}</span>
+                    <span className="text-xs sm:text-sm text-text-muted">{stat.label}</span>
                   </motion.div>
                 ))}
               </div>

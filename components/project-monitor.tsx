@@ -82,9 +82,9 @@ export function ProjectMonitor(): React.JSX.Element {
 
   if (loading) {
     return (
-      <section className="py-8 px-4" aria-label="Project monitoring">
+      <section className="py-6 sm:py-8 px-4" aria-label="Project monitoring">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
@@ -137,24 +137,24 @@ export function ProjectMonitor(): React.JSX.Element {
   };
 
   return (
-    <section className="pt-8 pb-0 px-4" aria-label="Project monitoring">
+    <section className="pt-6 sm:pt-8 pb-0 px-4" aria-label="Project monitoring">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold text-foreground mb-2">
+        <div className="mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">
             Project Contributions
           </h2>
-          <p className="text-text-muted text-sm">
+          <p className="text-text-muted text-xs sm:text-sm">
             Key projects I&apos;ve led, architected, and delivered
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
           {projects.map((project, index) => {
             const isHighlighted = project.name === 'Observability Standardization';
             return (
             <motion.div
               key={project.name}
-              className={`gh-box hover:border-accent transition-all duration-200 hover:shadow-lg relative overflow-hidden h-full flex flex-col ${
+              className={`gh-box hover:border-accent transition-all duration-200 hover:shadow-lg relative overflow-hidden h-full flex flex-col p-4 sm:p-6 ${
                 isHighlighted ? 'ring-2 ring-accent ring-offset-2 ring-offset-background' : ''
               }`}
               initial={{ opacity: 0, y: 20 }}

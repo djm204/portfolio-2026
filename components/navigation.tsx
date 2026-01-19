@@ -60,19 +60,19 @@ export function Navigation(): React.JSX.Element {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="text-lg font-semibold text-foreground hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded px-2 py-1"
+            className="text-base sm:text-lg font-semibold text-foreground hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded px-2 py-1"
           >
             davidmendez
           </Link>
-          <div className="flex items-center gap-4">
-            <ul className="flex gap-1">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <ul className="flex gap-0.5 sm:gap-1">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-accent ${
+                      className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-accent ${
                         isActive
                           ? 'bg-subtle-bg text-foreground border border-border'
                           : 'text-text-muted hover:text-foreground hover:bg-subtle-bg'
@@ -85,7 +85,7 @@ export function Navigation(): React.JSX.Element {
                 );
               })}
             </ul>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <ThemeToggle />
               <Suspense fallback={null}>
                 <AuthButtonWrapper />

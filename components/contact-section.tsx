@@ -38,10 +38,10 @@ export function ContactSection(): React.JSX.Element {
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
             Get in Touch
           </h2>
-          <p className="text-lg text-text-muted max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-text-muted max-w-2xl mx-auto">
             Interested in discussing engineering challenges, infrastructure modernization,
             or potential opportunities? Let&apos;s connect.
           </p>
@@ -60,7 +60,7 @@ export function ContactSection(): React.JSX.Element {
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="group flex items-center gap-3 px-6 py-4 bg-subtle-bg border border-border rounded-lg hover:border-accent hover:bg-background transition-all duration-200 min-w-[200px]"
+                className="group flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-subtle-bg border border-border rounded-lg hover:border-accent hover:bg-background transition-all duration-200 w-full sm:min-w-[200px]"
               >
                 {link.icon === 'image' ? (
                   <Image

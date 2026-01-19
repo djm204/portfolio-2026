@@ -36,13 +36,13 @@ export function AuthButton(): React.JSX.Element {
 
   if (user) {
     return (
-      <div className="flex items-center gap-4">
-        <span className="text-sm text-text-muted">
+      <div className="flex items-center gap-2 sm:gap-4">
+        <span className="hidden sm:inline text-xs sm:text-sm text-text-muted truncate max-w-[120px] sm:max-w-none">
           {user.name} ({user.email})
         </span>
         <button
           onClick={signOut}
-          className="px-4 py-2 text-sm bg-subtle-bg border border-border rounded hover:bg-accent hover:text-white transition-colors"
+          className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm bg-subtle-bg border border-border rounded hover:bg-accent hover:text-white transition-colors"
         >
           Sign Out
         </button>
@@ -54,9 +54,9 @@ export function AuthButton(): React.JSX.Element {
     <button
       onClick={handleSignIn}
       disabled={isSigningIn}
-      className="px-4 py-2 text-sm bg-accent text-white rounded hover:bg-accent-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm bg-accent text-white rounded hover:bg-accent-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
     >
-      {isSigningIn ? 'Signing in...' : 'Sign In with Google'}
+      {isSigningIn ? 'Signing in...' : 'Sign In'}
     </button>
   );
 }
