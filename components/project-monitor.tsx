@@ -181,10 +181,14 @@ export function ProjectMonitor(): React.JSX.Element {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-          {projects.map((project, index) => (
+          {projects.map((project, index) => {
+            const isHighlighted = project.name === 'Observability Standardization';
+            return (
             <motion.div
               key={project.name}
-              className="gh-box hover:border-accent transition-all duration-200 hover:shadow-lg relative overflow-hidden h-full flex flex-col"
+              className={`gh-box hover:border-accent transition-all duration-200 hover:shadow-lg relative overflow-hidden h-full flex flex-col ${
+                isHighlighted ? 'ring-2 ring-accent ring-offset-2 ring-offset-background' : ''
+              }`}
               style={{
                 backgroundImage: 'url(/assets/panelbg-matrix.webp)',
                 backgroundSize: 'cover',
@@ -370,7 +374,7 @@ export function ProjectMonitor(): React.JSX.Element {
               </div>
               </div>
             </motion.div>
-          );
+            );
           })}
         </div>
       </div>
