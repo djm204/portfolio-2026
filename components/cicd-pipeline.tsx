@@ -102,8 +102,8 @@ export function CicdPipeline(): React.JSX.Element {
       </div>
 
       <div className="relative">
-        {/* Pipeline Flow */}
-        <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-4">
+        {/* Pipeline Flow - GitHub Actions style with wrapping */}
+        <div className="flex flex-wrap items-start justify-center gap-8 md:gap-12">
           {pipelineSteps.map((step, index) => {
             const StatusIcon = getStatusIcon(step.status);
             const StepIcon = step.icon;
@@ -111,13 +111,13 @@ export function CicdPipeline(): React.JSX.Element {
             const connectorColor = step.status === 'completed' ? 'success' : 'border';
 
             return (
-              <div key={step.id} className="flex flex-col md:flex-row items-center gap-4 md:gap-4 flex-1 min-w-[200px]">
+              <div key={step.id} className="flex items-center">
                 {/* Step Card */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className={`relative w-full md:min-w-[220px] border-2 rounded-lg p-6 transition-all ${
+                  className={`relative w-[240px] border-2 rounded-lg p-6 transition-all ${
                     step.status === 'in-progress'
                       ? 'ring-2 ring-accent ring-offset-2 ring-offset-background shadow-lg'
                       : ''
@@ -178,16 +178,16 @@ export function CicdPipeline(): React.JSX.Element {
                   </p>
                 </motion.div>
 
-                {/* Connector Arrow - Desktop */}
+                {/* Connector Arrow - Horizontal for all screen sizes */}
                 {!isLast && (
-                  <div className="hidden md:flex items-center justify-center flex-shrink-0 px-4">
+                  <div className="flex items-center justify-center flex-shrink-0 mx-2">
                     <div className="flex items-center relative">
                       {/* Line */}
                       <motion.div
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                        className={`h-2 w-20 ${
+                        className={`h-2 w-16 ${
                           connectorColor === 'success'
                             ? 'bg-success'
                             : 'bg-border'
@@ -202,36 +202,6 @@ export function CicdPipeline(): React.JSX.Element {
                           connectorColor === 'success'
                             ? 'border-l-success'
                             : 'border-l-border'
-                        }`}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Vertical Connector for Mobile */}
-                {!isLast && (
-                  <div className="md:hidden flex flex-col items-center justify-center flex-shrink-0 py-4">
-                    <div className="flex flex-col items-center relative">
-                      {/* Line */}
-                      <motion.div
-                        initial={{ scaleY: 0 }}
-                        animate={{ scaleY: 1 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                        className={`w-2 h-20 ${
-                          connectorColor === 'success'
-                            ? 'bg-success'
-                            : 'bg-border'
-                        }`}
-                      />
-                      {/* Arrow Head */}
-                      <motion.div
-                        initial={{ opacity: 0, y: -5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: index * 0.1 + 0.6 }}
-                        className={`absolute bottom-0 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[12px] ${
-                          connectorColor === 'success'
-                            ? 'border-t-success'
-                            : 'border-t-border'
                         }`}
                       />
                     </div>
