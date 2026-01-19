@@ -15,7 +15,7 @@ pages_build_output_dir = "out"
 # 4. Replace YOUR_NAMESPACE_ID below with that ID
 [[kv_namespaces]]
 binding = "CONTENT_KV"
-id = "YOUR_NAMESPACE_ID"
+id = "6135ddb2170c4f59803de8d364869c0e"
 
 # If you need full-stack capabilities (SSR, API routes), uncomment below
 # and use @cloudflare/next-on-pages adapter instead of static export
