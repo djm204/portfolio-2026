@@ -63,18 +63,18 @@ export function ProjectMonitor(): React.JSX.Element {
           techStack: ['React', 'TypeScript', 'REST API'],
         },
         {
-          name: 'Harry Rosen Storefront',
-          description: 'Lead Frontend - Enterprise luxury retail React interface (2020-2021)',
-          status: 'maintenance',
-          uptime: 99.94,
-          responseTime: 165,
-          errorRate: 0.025,
+          name: 'Observability Standardization',
+          description: 'Axiom + Sentry integration for unified logging, monitoring, and error tracking',
+          status: 'operational',
+          uptime: 99.98,
+          responseTime: 45,
+          errorRate: 0.005,
           costPerMonth: 0,
           costReduction: 0,
-          requestsPerDay: 2100000,
-          p95Latency: 312,
-          lastDeployed: new Date('2020-11-31').toISOString(),
-          techStack: ['React', 'TypeScript', 'State Management'],
+          requestsPerDay: 5200000,
+          p95Latency: 120,
+          lastDeployed: new Date('2024-08-15').toISOString(),
+          techStack: ['Axiom', 'Sentry', 'Next.js', 'TypeScript', 'Observability'],
         },
       ];
 
@@ -330,7 +330,7 @@ export function ProjectMonitor(): React.JSX.Element {
                 <div className="text-xs text-text-muted mb-2 uppercase tracking-wide">
                   Tech Stack
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1.5 py-1">
                   {project.techStack.map((tech, techIndex) => {
                     // Terminal color rotation for visual variety
                     const colorClasses = [
@@ -370,7 +370,8 @@ export function ProjectMonitor(): React.JSX.Element {
               </div>
               </div>
             </motion.div>
-          ))}
+          );
+          })}
         </div>
       </div>
     </section>
