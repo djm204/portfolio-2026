@@ -84,7 +84,7 @@ export function CicdPipeline(): React.JSX.Element {
       case 'completed':
         return 'Completed';
       case 'in-progress':
-        return 'Under Development';
+        return 'In Progress';
       case 'pending':
         return 'Pending';
     }
@@ -249,7 +249,7 @@ export function CicdPipeline(): React.JSX.Element {
           <Loader2 className="w-6 h-6 text-accent animate-spin shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-foreground mb-2 text-lg">
-              Currently Under Development: Build Step
+              Currently In Progress: Build Step
             </h3>
             <p className="text-sm text-text-muted leading-relaxed">
               Working on optimizing the build process, MDX compilation, database export workflows,
