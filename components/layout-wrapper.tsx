@@ -4,6 +4,7 @@ import { ThemeProvider } from './theme-provider';
 import { AuthProvider } from './auth-provider';
 import { Navigation } from './navigation';
 import { Footer } from './footer';
+import { GoogleAnalytics } from './google-analytics';
 
 /**
  * Layout Wrapper Component
@@ -18,6 +19,7 @@ export function LayoutWrapper({
   return (
     <ThemeProvider>
       <AuthProvider>
+        <GoogleAnalytics />
         <Navigation />
         {children}
         <Footer />
