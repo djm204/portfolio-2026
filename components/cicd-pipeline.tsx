@@ -180,23 +180,25 @@ export function CicdPipeline(): React.JSX.Element {
 
                 {/* Connector Arrow - Desktop */}
                 {!isLast && (
-                  <div className="hidden md:flex items-center flex-shrink-0 px-2">
-                    <div className="flex items-center">
+                  <div className="hidden md:flex items-center justify-center flex-shrink-0 px-4">
+                    <div className="flex items-center relative">
+                      {/* Line */}
                       <motion.div
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.4, delay: index * 0.1 + 0.3 }}
-                        className={`h-1 w-12 ${
+                        transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                        className={`h-2 w-20 ${
                           connectorColor === 'success'
                             ? 'bg-success'
                             : 'bg-border'
                         }`}
                       />
+                      {/* Arrow Head */}
                       <motion.div
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 + 0.5 }}
-                        className={`w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] ${
+                        initial={{ opacity: 0, x: -5 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 + 0.6 }}
+                        className={`absolute right-0 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[12px] ${
                           connectorColor === 'success'
                             ? 'border-l-success'
                             : 'border-l-border'
@@ -208,27 +210,31 @@ export function CicdPipeline(): React.JSX.Element {
 
                 {/* Vertical Connector for Mobile */}
                 {!isLast && (
-                  <div className="md:hidden flex flex-col items-center flex-shrink-0 py-2">
-                    <motion.div
-                      initial={{ scaleY: 0 }}
-                      animate={{ scaleY: 1 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 + 0.3 }}
-                      className={`w-1 h-12 ${
-                        connectorColor === 'success'
-                          ? 'bg-success'
-                          : 'bg-border'
-                      }`}
-                    />
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 + 0.5 }}
-                      className={`w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] ${
-                        connectorColor === 'success'
-                          ? 'border-t-success'
-                          : 'border-t-border'
-                      }`}
-                    />
+                  <div className="md:hidden flex flex-col items-center justify-center flex-shrink-0 py-4">
+                    <div className="flex flex-col items-center relative">
+                      {/* Line */}
+                      <motion.div
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: 1 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                        className={`w-2 h-20 ${
+                          connectorColor === 'success'
+                            ? 'bg-success'
+                            : 'bg-border'
+                        }`}
+                      />
+                      {/* Arrow Head */}
+                      <motion.div
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 + 0.6 }}
+                        className={`absolute bottom-0 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[12px] ${
+                          connectorColor === 'success'
+                            ? 'border-t-success'
+                            : 'border-t-border'
+                        }`}
+                      />
+                    </div>
                   </div>
                 )}
               </div>
