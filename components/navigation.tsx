@@ -27,9 +27,23 @@ function AuthButtonWrapper(): React.JSX.Element | null {
  * Navigation Component
  * Verification: Test active state highlighting, keyboard navigation, responsive menu
  * Should be fully accessible and indicate current page
+ * Hides when under construction is enabled (unless user is admin)
  */
 export function Navigation(): React.JSX.Element {
   const pathname = usePathname();
+  const { isAdmin, isLoading: authLoading } = useAuth();
+
+  // Check if under construction is enabled
+  const underConstructionEnv = process.env.NEXT_PUBLIC_UNDER_CONSTRUCTION || '';
+  const isUnderConstruction = 
+    underConstructionEnv === 'true' || 
+    underConstructionEnv === '1' || 
+    underConstructionEnv === 'enabled';
+
+  // Hide navigation if under construction and user is not admin
+  if (!authLoading && isUnderConstruction && !isAdmin) {
+    return <></>;
+  }
 
   const navItems = [
     { href: '/', label: 'Home' },

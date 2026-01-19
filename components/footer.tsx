@@ -3,15 +3,30 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from './theme-provider';
+import { useAuth } from './auth-provider';
 
 /**
  * Footer Component
  * Industry standard: Footer with contact links and site info
  * Verification: Test responsive layout, link accessibility
  * Should be minimal and accessible
+ * Hides when under construction is enabled (unless user is admin)
  */
 export function Footer(): React.JSX.Element {
   const { theme } = useTheme();
+  const { isAdmin, isLoading: authLoading } = useAuth();
+
+  // Check if under construction is enabled
+  const underConstructionEnv = process.env.NEXT_PUBLIC_UNDER_CONSTRUCTION || '';
+  const isUnderConstruction = 
+    underConstructionEnv === 'true' || 
+    underConstructionEnv === '1' || 
+    underConstructionEnv === 'enabled';
+
+  // Hide footer if under construction and user is not admin
+  if (!authLoading && isUnderConstruction && !isAdmin) {
+    return <></>;
+  }
 
   return (
     <footer
