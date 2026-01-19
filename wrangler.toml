@@ -17,6 +17,22 @@ pages_build_output_dir = "out"
 binding = "CONTENT_KV"
 id = "6135ddb2170c4f59803de8d364869c0e"
 
+# Environment Variables
+# Note: For Next.js static exports, NEXT_PUBLIC_* variables must ALSO be set in
+# Cloudflare Pages Dashboard → Settings → Environment variables for build-time.
+# wrangler.toml vars are available at runtime for Pages Functions.
+[vars]
+# Replace with your actual Google OAuth Client ID
+NEXT_PUBLIC_GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID_HERE"
+ADMIN_EMAIL = "me@davidmendez.dev"
+
+# Environment-specific variables (optional)
+# [env.preview.vars]
+# NEXT_PUBLIC_GOOGLE_CLIENT_ID = "preview-client-id"
+
+# [env.production.vars]
+# NEXT_PUBLIC_GOOGLE_CLIENT_ID = "production-client-id"
+
 # If you need full-stack capabilities (SSR, API routes), uncomment below
 # and use @cloudflare/next-on-pages adapter instead of static export
 # compatibility_flags = ["nodejs_compat"]

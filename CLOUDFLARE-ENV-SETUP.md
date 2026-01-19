@@ -3,10 +3,36 @@
 ## ⚠️ Important: Environment Variables vs KV
 
 **Environment variables** (like `NEXT_PUBLIC_GOOGLE_CLIENT_ID`) are different from **KV storage**:
-- **Environment Variables**: Set in Cloudflare Pages dashboard → Settings → Environment variables
+- **Environment Variables**: Can be set in `wrangler.toml` OR Cloudflare Pages dashboard → Settings → Environment variables
 - **KV Storage**: Used for runtime data (like content overrides, feature flags)
 
-## Setting Up Environment Variables in Cloudflare Pages
+## ⚠️ Build-Time vs Runtime Variables
+
+For Next.js static exports:
+- **Build-time variables** (`NEXT_PUBLIC_*`): Must be set in Cloudflare Pages dashboard → Settings → Environment variables (they're embedded into the JS bundle during build)
+- **Runtime variables**: Can be set in `wrangler.toml` and are available to Pages Functions at runtime
+
+**Best Practice:** Set `NEXT_PUBLIC_*` variables in BOTH places:
+1. `wrangler.toml` (for documentation and consistency)
+2. Cloudflare Pages dashboard (for actual build-time embedding)
+
+## Setting Up Environment Variables
+
+You can set environment variables in two ways:
+
+### Option 1: Using `wrangler.toml` (Recommended for Documentation)
+
+Add variables to your `wrangler.toml` file:
+
+```toml
+[vars]
+NEXT_PUBLIC_GOOGLE_CLIENT_ID = "your-google-client-id-here"
+ADMIN_EMAIL = "me@davidmendez.dev"
+```
+
+**Note:** For `NEXT_PUBLIC_*` variables, you still need to set them in the Cloudflare Pages dashboard for build-time embedding (see Option 2).
+
+### Option 2: Using Cloudflare Pages Dashboard (Required for Build-Time)
 
 ### Step 1: Go to Your Pages Project Settings
 
