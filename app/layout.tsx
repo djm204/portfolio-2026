@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     'Infrastructure',
   ],
   authors: [{ name: 'David Mendez' }],
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     title: 'David Mendez - Staff Engineer',
     description:
