@@ -11,12 +11,12 @@ export default function Home() {
       <ErrorBoundary>
         <GitHubHero />
       </ErrorBoundary>
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4">
         <ErrorBoundary>
           <ProjectMonitor />
         </ErrorBoundary>
         <ErrorBoundary>
-          <div className="mb-12 text-center">
+          <div className="mb-12 text-center pt-8">
             <Link
               href="/case-studies"
               className="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-medium px-6 py-3 rounded-md hover:bg-subtle-bg transition-colors text-lg"

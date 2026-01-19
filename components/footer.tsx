@@ -15,7 +15,7 @@ export function Footer(): React.JSX.Element {
 
   return (
     <footer
-      className="border-t border-border bg-subtle-bg py-8 px-4 mt-12"
+      className="border-t border-border bg-subtle-bg py-8 px-4 mt-0"
       role="contentinfo"
     >
       <div className="max-w-7xl mx-auto">

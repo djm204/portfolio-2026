@@ -169,7 +169,7 @@ export function ProjectMonitor(): React.JSX.Element {
   };
 
   return (
-    <section className="py-8 px-4" aria-label="Project monitoring">
+    <section className="pt-8 pb-0 px-4" aria-label="Project monitoring">
       <div className="max-w-7xl mx-auto">
         <div className="mb-6">
           <h2 className="text-2xl font-semibold text-foreground mb-2">
