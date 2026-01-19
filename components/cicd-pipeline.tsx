@@ -175,18 +175,10 @@ export function CicdPipeline(): React.JSX.Element {
                   </p>
                 </motion.div>
 
-                {/* Horizontal Connector */}
+                {/* Horizontal Connector - pill style (GitHub Actions-like) */}
                 {!isLast && (
-                  <div className="flex items-center justify-center flex-shrink-0 mx-2">
-                    <div className="flex items-center">
-                      <div className={`h-1 w-10 rounded-full ${connectorColor}`} />
-                      <div
-                        className={`w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] ${connectorColor.replace(
-                          'bg-',
-                          'border-l-',
-                        )}`}
-                      />
-                    </div>
+                  <div className="flex items-center justify-center flex-shrink-0 mx-3">
+                    <div className={`h-2 w-10 rounded-full ${connectorColor}`} />
                   </div>
                 )}
               </div>
@@ -273,16 +265,11 @@ export function CicdPipeline(): React.JSX.Element {
                   </p>
                 </motion.div>
 
-                {/* Vertical Connector */}
+                {/* Vertical Connector - pill style (GitHub Actions-like) */}
                 {!isLast && (
                   <div className="flex flex-col items-center justify-center py-3">
                     <div className={`w-1 h-6 rounded-full ${connectorColor}`} />
-                    <div
-                      className={`w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[10px] ${connectorColor.replace(
-                        'bg-',
-                        'border-t-',
-                      )}`}
-                    />
+                    <div className={`w-2 h-2 mt-1 rounded-full ${connectorColor}`} />
                   </div>
                 )}
               </div>
