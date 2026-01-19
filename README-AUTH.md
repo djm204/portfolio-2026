@@ -47,26 +47,25 @@ Only the email address specified in `ADMIN_EMAIL` (default: `me@davidmendez.dev`
 
 ### 4. Cloudflare KV Setup
 
-Content overrides are stored in Cloudflare KV for fast, edge-accessible storage:
+Content overrides are stored in Cloudflare KV for fast, edge-accessible storage.
+
+**📖 For detailed step-by-step instructions, see [KV-SETUP.md](./KV-SETUP.md)**
+
+**Quick Setup:**
 
 1. **Create a KV Namespace:**
-   ```bash
-   wrangler kv:namespace create "CONTENT_KV"
-   ```
+   - Go to Cloudflare Dashboard → Workers & Pages → KV
+   - Click "Create a namespace"
+   - Name it: `CONTENT_KV`
+   - Copy the Namespace ID
 
-2. **Add to `wrangler.toml` (if using Wrangler):**
-   ```toml
-   [[kv_namespaces]]
-   binding = "CONTENT_KV"
-   id = "your-kv-namespace-id"
-   ```
-
-3. **In Cloudflare Dashboard:**
-   - Go to your Pages project
-   - Navigate to Settings → Functions
-   - Add KV namespace binding:
-     - Variable name: `CONTENT_KV`
-     - KV namespace: Select your namespace
+2. **Bind to Pages Project:**
+   - Go to your Pages project → Settings → Functions
+   - Scroll to "KV namespace bindings"
+   - Click "Add binding"
+   - Variable name: `CONTENT_KV` (must match exactly, case-sensitive)
+   - KV namespace: Select your namespace
+   - Save
 
 **Note:** If KV is not configured, the editing functionality will still work, but content updates won't persist. The system will gracefully fall back to static content.
 
