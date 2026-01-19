@@ -31,21 +31,21 @@ const pipelineSteps: PipelineStep[] = [
     name: 'Build',
     description: 'Next.js static export, MDX compilation, database export',
     icon: Wrench,
-    status: 'completed',
+    status: 'in-progress', // Under development
   },
   {
     id: 'test',
     name: 'Test',
     description: 'TypeScript validation, ESLint, type checking',
     icon: TestTube,
-    status: 'completed',
+    status: 'pending',
   },
   {
     id: 'deploy',
     name: 'Deploy',
     description: 'Cloudflare Pages deployment with KV bindings',
     icon: Rocket,
-    status: 'in-progress', // Under development
+    status: 'pending',
   },
   {
     id: 'monitor',
@@ -243,12 +243,12 @@ export function CicdPipeline(): React.JSX.Element {
           <Loader2 className="w-6 h-6 text-accent animate-spin shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-foreground mb-2 text-lg">
-              Currently Under Development: Deploy Step
+              Currently Under Development: Build Step
             </h3>
             <p className="text-sm text-text-muted leading-relaxed">
-              Working on optimizing Cloudflare Pages deployment, KV bindings configuration, and
-              automated deployment workflows. This includes fine-tuning the build process and
-              ensuring seamless integration with Cloudflare&apos;s edge network.
+              Working on optimizing the build process, MDX compilation, database export workflows,
+              and static site generation. This includes fine-tuning Next.js build configuration and
+              ensuring efficient content compilation.
             </p>
           </div>
         </div>
