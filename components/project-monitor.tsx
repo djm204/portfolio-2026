@@ -15,8 +15,9 @@ export function ProjectMonitor(): React.JSX.Element {
 
   useEffect(() => {
     // Simulate API call - in production, fetch from monitoring service
-    const fetchProjects = async (): Promise<void> => {
-      await new Promise((resolve) => setTimeout(resolve, 800));
+    let isMounted = true;
+    const timer = setTimeout(() => {
+      if (!isMounted) return;
 
       // Projects with contribution-focused metrics
       const mockProjects: ProjectMetrics[] = [
@@ -71,9 +72,12 @@ export function ProjectMonitor(): React.JSX.Element {
 
       setProjects(mockProjects);
       setLoading(false);
-    };
+    }, 800);
 
-    void fetchProjects();
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   if (loading) {

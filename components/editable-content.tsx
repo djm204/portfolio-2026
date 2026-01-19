@@ -33,10 +33,16 @@ export function EditableContent({
   useEffect(() => {
     if (!isAdmin || !user) return;
 
+    const controller = new AbortController();
+    let isMounted = true;
+
     const fetchOverride = async (): Promise<void> => {
       setIsLoading(true);
       try {
-        const response = await fetch(`/api/case-studies/read?slug=${encodeURIComponent(slug)}`);
+        const response = await fetch(`/api/case-studies/read?slug=${encodeURIComponent(slug)}`, {
+          signal: controller.signal,
+        });
+        if (!isMounted) return;
         if (response.ok) {
           const data = await response.json() as { content: string | null };
           if (data.content) {
@@ -46,14 +52,22 @@ export function EditableContent({
           }
         }
       } catch (error) {
+        if ((error as Error).name === 'AbortError') return;
         console.error('Failed to fetch content override:', error as Error);
         // Fall back to static content
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
 
-    fetchOverride();
+    void fetchOverride();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
   }, [isAdmin, user, slug]);
 
   // For non-admins, always show static content

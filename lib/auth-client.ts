@@ -86,29 +86,68 @@ export function clearSession(): void {
 }
 
 /**
- * Initialize Google OAuth
+ * Track script load to prevent duplicates
+ */
+let googleScriptLoading: Promise<void> | null = null;
+
+/**
+ * Initialize Google OAuth (idempotent)
  */
 export function initGoogleAuth(): Promise<void> {
-  return new Promise((resolve, reject) => {
-    if (typeof window === 'undefined') {
-      reject(new Error('Window is not available'));
-      return;
-    }
+  if (typeof window === 'undefined') {
+    return Promise.reject(new Error('Window is not available'));
+  }
 
-    // Load Google Identity Services
-    if (window.google) {
-      resolve();
-      return;
-    }
+  // Already loaded
+  if (window.google) {
+    return Promise.resolve();
+  }
 
+  // Already loading
+  if (googleScriptLoading) {
+    return googleScriptLoading;
+  }
+
+  // Existing script tag (avoid duplicates)
+  const existingScript = document.querySelector<HTMLScriptElement>(
+    'script[src="https://accounts.google.com/gsi/client"]',
+  );
+
+  if (existingScript) {
+    googleScriptLoading = new Promise((resolve, reject) => {
+      existingScript.addEventListener('load', () => {
+        googleScriptLoading = null;
+        resolve();
+      }, { once: true });
+      existingScript.addEventListener(
+        'error',
+        () => {
+          googleScriptLoading = null;
+          reject(new Error('Failed to load Google Identity Services'));
+        },
+        { once: true },
+      );
+    });
+    return googleScriptLoading;
+  }
+
+  googleScriptLoading = new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = 'https://accounts.google.com/gsi/client';
     script.async = true;
     script.defer = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error('Failed to load Google Identity Services'));
+    script.onload = () => {
+      googleScriptLoading = null;
+      resolve();
+    };
+    script.onerror = () => {
+      googleScriptLoading = null;
+      reject(new Error('Failed to load Google Identity Services'));
+    };
     document.head.appendChild(script);
   });
+
+  return googleScriptLoading;
 }
 
 // Extend Window interface for Google OAuth

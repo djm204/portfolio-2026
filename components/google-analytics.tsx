@@ -5,6 +5,9 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 const GA_MEASUREMENT_ID = 'G-65X2S7VYFS';
+const UNDER_CONSTRUCTION_FLAG = process.env.NEXT_PUBLIC_UNDER_CONSTRUCTION || '';
+const DISABLE_GA_UNDER_CONSTRUCTION =
+  process.env.NEXT_PUBLIC_DISABLE_ANALYTICS_ON_UNDER_CONSTRUCTION || '';
 
 /**
  * Google Analytics Component
@@ -14,6 +17,20 @@ const GA_MEASUREMENT_ID = 'G-65X2S7VYFS';
  */
 export function GoogleAnalytics(): React.JSX.Element {
   const pathname = usePathname();
+
+  const isUnderConstruction =
+    UNDER_CONSTRUCTION_FLAG === 'true' ||
+    UNDER_CONSTRUCTION_FLAG === '1' ||
+    UNDER_CONSTRUCTION_FLAG === 'enabled';
+
+  const shouldDisableAnalytics =
+    isUnderConstruction &&
+    (DISABLE_GA_UNDER_CONSTRUCTION === 'true' || DISABLE_GA_UNDER_CONSTRUCTION === '1');
+
+  if (shouldDisableAnalytics) {
+    // Skip loading GA entirely when under construction and disabled by flag
+    return <></>;
+  }
 
   useEffect(() => {
     // Track page views on route changes
