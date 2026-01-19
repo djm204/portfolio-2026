@@ -5,6 +5,7 @@ import { AuthProvider } from './auth-provider';
 import { Navigation } from './navigation';
 import { Footer } from './footer';
 import { GoogleAnalytics } from './google-analytics';
+import { UnderConstructionWrapper } from './under-construction-wrapper';
 
 /**
  * Layout Wrapper Component
@@ -21,7 +22,9 @@ export function LayoutWrapper({
       <AuthProvider>
         <GoogleAnalytics />
         <Navigation />
-        {children}
+        <UnderConstructionWrapper>
+          {children}
+        </UnderConstructionWrapper>
         <Footer />
       </AuthProvider>
     </ThemeProvider>

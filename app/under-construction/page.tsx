@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 
 /**
  * Under Construction Page
- * Shows the portfolio's CI/CD pipeline with current development status
+ * Direct access to the CI/CD pipeline visualization
+ * Note: The UnderConstructionWrapper handles showing this page based on KV flag
+ * This page is for direct access to the pipeline diagram
  * Industry standard: Transparent development process
  * Verification: Test pipeline visualization, responsive layout
  */
