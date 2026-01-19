@@ -38,6 +38,10 @@ For Cloudflare Pages, add these as environment variables in the Cloudflare dashb
 - `NEXT_PUBLIC_GOOGLE_CLIENT_ID`
 - `ADMIN_EMAIL`
 
+**📖 For detailed Cloudflare Pages environment variable setup, see [CLOUDFLARE-ENV-SETUP.md](./CLOUDFLARE-ENV-SETUP.md)**
+
+**⚠️ Important:** Environment variables must be set in **Cloudflare Pages Settings → Environment variables**, NOT in KV storage. KV is for runtime data, environment variables are for build-time configuration.
+
 ### 3. Access Control
 
 Only the email address specified in `ADMIN_EMAIL` (default: `me@davidmendez.dev`) can:
