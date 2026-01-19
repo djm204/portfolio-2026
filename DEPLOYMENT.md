@@ -13,8 +13,12 @@
 ```
 Build command: npm run build
 Output directory: out
-Deploy command: npx wrangler pages deploy out
+Deploy command: echo "Deployment handled automatically by Cloudflare Pages"
 ```
+
+**OR if the field can be left empty, leave it empty!**
+
+**Note:** Cloudflare Pages automatically deploys the `out` directory after the build completes. The deploy command is typically not needed for static exports.
 
 ### ❌ WRONG Deploy Command
 
@@ -45,10 +49,26 @@ Setting a deploy command is unnecessary and can cause errors if it uses the wron
 
 ## Troubleshooting
 
+### Authentication Error (code: 10000)
+
+If you see this error:
+```
+✘ [ERROR] A request to the Cloudflare API failed.
+  Authentication error [code: 10000]
+```
+
+**Solution:** This happens because Wrangler isn't authenticated in the Cloudflare Pages build environment. For static exports, you don't need a deploy command. Use one of these:
+
+1. **Best:** Leave the deploy command field empty (if possible)
+2. **Alternative:** Use a no-op command: `echo "Deployment handled automatically by Cloudflare Pages"`
+3. **Not recommended:** Don't use `npx wrangler pages deploy out` - it requires authentication that isn't available in the build environment
+
+### Wrong Command Error
+
 If you see this error:
 ```
 ✘ [ERROR] It looks like you've run a Workers-specific command in a Pages project.
   For Pages, please run `wrangler pages deploy` instead.
 ```
 
-**Solution:** Remove the deploy command from your Cloudflare Pages dashboard settings.
+**Solution:** Change `npx wrangler deploy` to use a no-op command or leave empty.

@@ -79,12 +79,12 @@ This project is optimized for Cloudflare Pages deployment using **static export*
    - Go to **Settings** → **Builds & deployments**
    - Set build command: `npm run build`
    - Set output directory: `out`
-   - Set deploy command: `npx wrangler pages deploy out`
-   - **⚠️ CRITICAL:** The deploy command MUST be `npx wrangler pages deploy out` (with `pages` keyword)
-   - **❌ WRONG:** `npx wrangler deploy` (this is for Workers, not Pages!)
+   - **Deploy command:** Leave empty if possible, OR use: `echo "Deployment handled automatically by Cloudflare Pages"`
+   - **⚠️ IMPORTANT:** Cloudflare Pages automatically deploys the `out` directory after build - no deploy command needed!
+   - **❌ DON'T USE:** `npx wrangler pages deploy out` - it requires authentication that isn't available in the build environment
    - Cloudflare Pages will automatically deploy on every push
    
-   **See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment configuration.**
+   **See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment configuration and troubleshooting.**
 
 3. **Deploy via Wrangler CLI (Alternative - Manual Deployment):**
    ```bash
