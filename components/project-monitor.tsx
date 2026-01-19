@@ -184,14 +184,6 @@ export function ProjectMonitor(): React.JSX.Element {
           {projects.map((project, index) => {
             const isHighlighted = project.name === 'Observability Standardization';
             return (
-            {/* Background image commented out - can be restored if needed
-            style={{
-              backgroundImage: 'url(/assets/panelbg-matrix.webp)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-            */}
             <motion.div
               key={project.name}
               className={`gh-box hover:border-accent transition-all duration-200 hover:shadow-lg relative overflow-hidden h-full flex flex-col ${
