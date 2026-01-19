@@ -30,7 +30,7 @@ export function CaseStudyTemplate({
             <ol className="flex items-center gap-2">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  Home
+                  Career
                 </Link>
               </li>
               <li>/</li>
