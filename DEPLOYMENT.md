@@ -13,27 +13,26 @@
 ```
 Build command: npm run build
 Output directory: out
-Deploy command: (LEAVE EMPTY - DO NOT SET THIS)
+Deploy command: npx wrangler pages deploy out
 ```
 
 ### ❌ WRONG Deploy Command
 
-If you see this in your deploy command field, **DELETE IT**:
+If you see this in your deploy command field, **CHANGE IT**:
 ```
 npx wrangler deploy
 ```
 
 This is for Cloudflare Workers, NOT Pages!
 
-### ✅ Correct Manual Deploy (CLI Only)
+### ✅ Correct Deploy Command
 
-If you need to deploy manually via CLI (not recommended for automated builds):
-
-```bash
+**You MUST use this exact command:**
+```
 npx wrangler pages deploy out
 ```
 
-**Note:** The `pages` keyword is required!
+**Note:** The `pages` keyword is required! Without it, you'll get an error about Workers vs Pages.
 
 ## Why No Deploy Command?
 
