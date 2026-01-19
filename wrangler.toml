@@ -25,6 +25,9 @@ id = "6135ddb2170c4f59803de8d364869c0e"
 # Replace with your actual Google OAuth Client ID
 NEXT_PUBLIC_GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID_HERE"
 ADMIN_EMAIL = "me@davidmendez.dev"
+# Set to "true", "1", or "enabled" to enable under construction page
+# Set to empty string, "false", or omit to disable
+NEXT_PUBLIC_UNDER_CONSTRUCTION = ""
 
 # Environment-specific variables (optional)
 # [env.preview.vars]

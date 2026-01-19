@@ -58,6 +58,11 @@ ADMIN_EMAIL = "me@davidmendez.dev"
    - **Value:** `me@davidmendez.dev`
    - **Environment:** Production (and Preview if needed)
 
+   **Variable 3 (Optional):**
+   - **Variable name:** `NEXT_PUBLIC_UNDER_CONSTRUCTION`
+   - **Value:** `true` (to enable) or leave empty/omit (to disable)
+   - **Environment:** Production (and Preview if needed)
+
 ### Step 3: Save and Redeploy
 
 1. Click **Save** or **Save variable**
