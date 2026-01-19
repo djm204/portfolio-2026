@@ -103,7 +103,7 @@ export function CicdPipeline(): React.JSX.Element {
 
       <div className="relative">
         {/* Pipeline Flow */}
-        <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-3">
+        <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-4">
           {pipelineSteps.map((step, index) => {
             const StatusIcon = getStatusIcon(step.status);
             const StepIcon = step.icon;
@@ -111,13 +111,13 @@ export function CicdPipeline(): React.JSX.Element {
             const connectorColor = step.status === 'completed' ? 'success' : 'border';
 
             return (
-              <div key={step.id} className="flex flex-col md:flex-row items-center gap-4 md:gap-3 flex-1">
+              <div key={step.id} className="flex flex-col md:flex-row items-center gap-4 md:gap-4 flex-1 min-w-[200px]">
                 {/* Step Card */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className={`relative w-full md:flex-1 min-w-0 border-2 rounded-lg p-5 transition-all ${
+                  className={`relative w-full md:min-w-[220px] border-2 rounded-lg p-6 transition-all ${
                     step.status === 'in-progress'
                       ? 'ring-2 ring-accent ring-offset-2 ring-offset-background shadow-lg'
                       : ''
@@ -128,11 +128,12 @@ export function CicdPipeline(): React.JSX.Element {
                     <div
                       className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border shadow-sm ${
                         step.status === 'completed'
-                          ? 'bg-success/20 text-success border-success/40'
+                          ? 'bg-[#1a7f37] text-white border-[#1a7f37]'
                           : step.status === 'in-progress'
-                            ? 'bg-accent/20 text-accent border-accent/40'
-                            : 'bg-text-muted/20 text-text-muted border-border'
+                            ? 'bg-[#0969da] text-white border-[#0969da]'
+                            : 'bg-[#57606a] text-white border-[#57606a]'
                       }`}
+                      style={{ opacity: 1 }}
                     >
                       <StatusIcon
                         className={`w-3.5 h-3.5 ${
@@ -148,9 +149,9 @@ export function CicdPipeline(): React.JSX.Element {
                     <div
                       className={`p-4 rounded-xl ${
                         step.status === 'completed'
-                          ? 'bg-success/20'
+                          ? 'bg-success/30'
                           : step.status === 'in-progress'
-                            ? 'bg-accent/20'
+                            ? 'bg-accent/30'
                             : 'bg-subtle-bg'
                       }`}
                     >
