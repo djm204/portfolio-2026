@@ -1,7 +1,11 @@
 'use client';
 
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Circle, Loader2, GitBranch, Wrench, Rocket, BarChart3 } from 'lucide-react';
+import { AuthButton } from './auth-button';
+import { useAuth } from './auth-provider';
 
 /**
  * CI/CD Pipeline Component
@@ -49,6 +53,26 @@ const pipelineSteps: PipelineStep[] = [
   },
 ];
 
+/**
+ * Auth Button Wrapper for Pipeline Page
+ * Shows auth button if banana=true or user is signed in
+ */
+function PipelineAuthButton(): React.JSX.Element | null {
+  const searchParams = useSearchParams();
+  const { user } = useAuth();
+  
+  // Show auth button if:
+  // 1. User is signed in (always show sign-out option), OR
+  // 2. banana=true query parameter is present (show sign-in button)
+  const showAuth = user !== null || searchParams.get('banana') === 'true';
+  
+  return showAuth ? (
+    <div className="flex justify-center mb-6">
+      <AuthButton />
+    </div>
+  ) : null;
+}
+
 export function CicdPipeline(): React.JSX.Element {
   const getStatusIcon = (status: PipelineStep['status']) => {
     switch (status) {
@@ -85,6 +109,9 @@ export function CicdPipeline(): React.JSX.Element {
 
   return (
     <div className="w-full">
+      <Suspense fallback={null}>
+        <PipelineAuthButton />
+      </Suspense>
       <div className="mb-8 sm:mb-12 text-center px-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
           Portfolio CI/CD Pipeline
