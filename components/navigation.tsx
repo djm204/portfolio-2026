@@ -47,8 +47,9 @@ export function Navigation(): React.JSX.Element {
 
   const navItems = [
     { href: '/', label: 'Career' },
-    { href: '/about', label: 'About' },
     { href: '/case-studies', label: 'Case Studies' },
+    { href: '/about', label: 'About' },
+
   ];
 
   return (
