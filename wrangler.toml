@@ -31,10 +31,10 @@ NEXT_PUBLIC_UNDER_CONSTRUCTION = "true"
 NEXT_PUBLIC_DISABLE_ANALYTICS_ON_UNDER_CONSTRUCTION=true
 # Environment-specific variables (optional)
 # [env.preview.vars]
-# NEXT_PUBLIC_GOOGLE_CLIENT_ID = "preview-client-id"
+# NEXT_PUBLIC_GOOGLE_CLIENT_ID = "364066108431-tdva4j3nsoh80u4omt7a3ft0rovl4ici.apps.googleusercontent.com"
 
 # [env.production.vars]
-# NEXT_PUBLIC_GOOGLE_CLIENT_ID = "production-client-id"
+# NEXT_PUBLIC_GOOGLE_CLIENT_ID = "364066108431-tdva4j3nsoh80u4omt7a3ft0rovl4ici.apps.googleusercontent.com"
 
 # If you need full-stack capabilities (SSR, API routes), uncomment below
 # and use @cloudflare/next-on-pages adapter instead of static export
