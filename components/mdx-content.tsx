@@ -30,6 +30,9 @@ export function MDXContent({ content }: MDXContentProps): React.JSX.Element {
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
+          h1: ({ node, ...props }) => (
+            <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-foreground mt-8 first:mt-0" {...props} />
+          ),
           h2: ({ node, ...props }) => (
             <h2 className="text-2xl font-semibold mb-4 text-foreground mt-8 first:mt-0" {...props} />
           ),
@@ -38,6 +41,17 @@ export function MDXContent({ content }: MDXContentProps): React.JSX.Element {
           ),
           h4: ({ node, ...props }) => (
             <h4 className="text-lg font-semibold mb-2 text-foreground mt-4" {...props} />
+          ),
+          a: ({ node, href, children, ...props }) => (
+            <a
+              href={href}
+              className="text-accent hover:text-accent-hover underline underline-offset-2 transition-colors"
+              target={href?.startsWith('http') ? '_blank' : undefined}
+              rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              {...props}
+            >
+              {children}
+            </a>
           ),
           p: ({ node, ...props }) => (
             <p className="text-text-secondary mb-4 leading-relaxed" {...props} />
