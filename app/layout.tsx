@@ -33,6 +33,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Explicit favicon link - animated GIF works in Firefox, static in Chrome/Edge */}
+        <link rel="icon" type="image/gif" href="/favicon.gif" />
+      </head>
       <body>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
