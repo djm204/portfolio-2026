@@ -39,7 +39,15 @@ export function EditableContent({
     const fetchOverride = async (): Promise<void> => {
       setIsLoading(true);
       try {
-        const response = await fetch(`/api/case-studies/read?slug=${encodeURIComponent(slug)}`, {
+        // Use /api/content/read for non-case-study content (like "about")
+        // Use /api/case-studies/read for case studies
+        const isCaseStudy = slug.startsWith('globalvision') || 
+                            slug.startsWith('release-track') || 
+                            slug.startsWith('observability');
+        const apiPath = isCaseStudy 
+          ? `/api/case-studies/read?slug=${encodeURIComponent(slug)}`
+          : `/api/content/read?slug=${encodeURIComponent(slug)}`;
+        const response = await fetch(apiPath, {
           signal: controller.signal,
         });
         if (!isMounted) return;
@@ -86,7 +94,13 @@ export function EditableContent({
       }
 
       // Save content via API
-      const response = await fetch('/api/case-studies/update', {
+      // Use /api/content/update for non-case-study content (like "about")
+      // Use /api/case-studies/update for case studies
+      const isCaseStudy = slug.startsWith('globalvision') || 
+                          slug.startsWith('release-track') || 
+                          slug.startsWith('observability');
+      const apiPath = isCaseStudy ? '/api/case-studies/update' : '/api/content/update';
+      const response = await fetch(apiPath, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
